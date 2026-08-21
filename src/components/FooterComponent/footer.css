@@ -1,0 +1,264 @@
+/* Footer Container */
+.footer-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Dark gradient overlay to ensure high readability */
+.footer-overlay {
+  width: 100%;
+  height: 100%;
+  padding: 60px 80px 30px 80px;
+  box-sizing: border-box;
+
+}
+
+.footer-content {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hero Branding Section */
+.footer-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+.footer-brand-title {
+  font-size: clamp(3.2rem, 8.5vw, 10.2rem);
+  font-weight: 700;
+  color: #FEE89D;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  word-break: break-word;
+}
+
+.footer-brand-subtitle {
+  font-size: clamp(1.6rem, 4.2vw, 5.2rem);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 10px 0 0 0;
+  letter-spacing: clamp(2px, 0.5vw, 6px);
+  text-transform: capitalize;
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+/* Horizontal Divider Line */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.35);
+  margin: 80px 0;
+}
+
+/* Contact & Social Links Section */
+.footer-middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-contact-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.contact-heading {
+  font-size: clamp(1.4rem, 2.2vw, 2.25rem);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 22px 0;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1rem, 1.3vw, 1.5rem);
+  line-height: 1.45;
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.contact-text {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1rem, 1.3vw, 1.5rem);
+  font-weight: 400;
+  word-break: break-word;
+}
+
+/* Social Block */
+.footer-social-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1.2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.social-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Copyright Bar */
+.footer-copyright {
+  text-align: center;
+  font-size: clamp(0.85rem, 1.1vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 45px;
+  padding-top: 15px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* Floating Scroll to Top Button */
+.scroll-up-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #0f3443;
+  color: #FEE89D;
+  border: 2px solid #FEE89D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 9999;
+}
+
+.scroll-up-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-up-btn:hover {
+  background-color: #FEE89D;
+  border-color: #0f3443;
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.scroll-up-btn:hover svg {
+  stroke: #0f3443;
+}
+
+/* Responsive Adaptations for Screen Sizes <= 1025px and <= 768px */
+@media (max-width: 1025px) {
+  .footer-overlay {
+    padding: 50px 40px 25px 40px;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 13, 24, 0.95) 0%,
+      rgba(7, 13, 24, 0.85) 100%
+    );
+  }
+
+  .footer-brand-title {
+    font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  }
+
+  .footer-brand-subtitle {
+    font-size: clamp(1.4rem, 3.8vw, 3.2rem);
+    letter-spacing: 4px;
+  }
+
+  .footer-hero {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-overlay {
+    padding: 36px 20px 20px 20px;
+  }
+
+  .footer-brand-title {
+    font-size: clamp(2.2rem, 9vw, 4rem);
+  }
+
+  .footer-brand-subtitle {
+    font-size: clamp(1.2rem, 4.5vw, 2rem);
+    letter-spacing: 3px;
+  }
+
+  .footer-divider {
+    margin: 25px 0 20px 0;
+  }
+
+  .footer-middle {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-social-block {
+    align-self: flex-start;
+  }
+
+  .footer-copyright {
+    margin-top: 30px;
+    font-size: 0.85rem;
+  }
+
+  .scroll-up-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}
