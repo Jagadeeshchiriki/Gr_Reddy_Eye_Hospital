@@ -11,6 +11,7 @@
 /* main-content must NOT have overflow: hidden or overflow: auto — breaks sticky */
 .main-content {
   overflow: visible;
+  /* padding-top: 130px;  offset for fixed header (margin-top 30px + logo ~70px + padding 24px) */
 }
 
 .HomePage h1 {
