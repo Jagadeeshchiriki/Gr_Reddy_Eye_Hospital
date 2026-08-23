@@ -12,30 +12,38 @@
 .intro-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1650px;
+  /* Measured off the reference design: the eye is ~70% of viewport width
+     and ~113% of viewport height, so it bleeds slightly past the fold. Those
+     two are equal on the design's 1.63 aspect canvas; taking the smaller of
+     the pair reproduces the same look at any aspect ratio and stops the eye
+     overflowing sideways on narrow/tall screens, where 70vw wins.
+     translateY(-80px) below puts the top of the eye at y = -80, which is
+     where the design has it. */
+  max-width: min(70vw, 113vh);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  /* GSAP animates the image inside, not this wrapper, so the per-breakpoint
+     translateY below stays owned by CSS. */
   transform: translateY(-80px); /* Moves image up further */
-  transition: transform 0.3s ease;
 }
 
 .intro-eye-img {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: contain;
   border-radius: 50%;
   display: block;
   user-select: none;
   pointer-events: none;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.08));
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.intro-wrapper:hover .intro-eye-img {
-  transform: scale(1.02);
+  /* No transition and no hover scale here: GSAP scrubs this transform against
+     scroll position, and a CSS transition would lag every frame of the scrub
+     while the hover rule would fight it outright. The scroll-driven zoom
+     replaces the old hover zoom. */
 }
 
 .intro-text-overlay {
@@ -43,7 +51,8 @@
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 92%;
+  max-width: 92%;
   text-align: center;
   z-index: 2;
   pointer-events: none;
@@ -54,7 +63,11 @@
 .intro-title {
   color: #ffffff;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(2.5rem, 5.8vw, 7.5rem);
+  /* Tracks the eye at the design's ratio of ~6.7% of its diameter, using the
+     same min() pair so the headline scales with the eye rather than against
+     it. Sized off width alone the two-line headline (hard <br>) wraps to
+     four; 4.7vw / 7.5vh is 6.7% of 70vw / 113vh respectively. */
+  font-size: clamp(1.15rem, min(4.7vw, 7.5vh), 7.5rem);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -64,47 +77,96 @@
   word-break: keep-all;
 }
 
-/* Responsive design adjustments */
-@media (max-width: 1024px) {
+/* Responsive design adjustments
+   Ladder: 1600 / 1280 / 1024 / 768 / 480 */
+@media (max-width: 1280px) {
+  /* The eye is centred but the logo is pinned left, so the two converge as
+     the window narrows — below ~1280px the navy logo starts landing on the
+     dark iris. Nudge the eye down to clear it, same idea as the padding-top
+     used at <=1024px. */
+  .intro-container {
+    padding-top: 72px;
+  }
+
+  /* No max-width override: the base min(70vw, 113vh) is already relative, so
+     it holds the design proportion here too. Overriding it decoupled the eye
+     from the headline, which then wrapped to three lines. */
   .intro-wrapper {
-    max-width: 95vw;
-    transform: translateY(-50px);
+    transform: translateY(-64px);
+  }
+}
+
+@media (max-width: 1024px) {
+  /* The eye nearly fills the width at these sizes, so the fixed header
+     lands on the dark iris and the navy logo becomes unreadable. Clear it
+     instead of pulling the image up under the header. */
+  .intro-container {
+    padding-top: 96px;
+  }
+
+  .intro-wrapper {
+    max-width: min(95vw, calc(100vh - 130px));
+    transform: none;
   }
 
   .intro-title {
-    font-size: clamp(2.2rem, 5.5vw, 5.5rem);
+    font-size: min(clamp(2.2rem, 5.5vw, 5.5rem), 5.5vh);
     line-height: 1.2;
   }
 }
 
 @media (max-width: 768px) {
   .intro-container {
-    padding: 0 12px;
+    padding: 84px 12px 0;
   }
 
   .intro-wrapper {
-    max-width: 96vw;
-    transform: translateY(-30px);
+    max-width: min(96vw, calc(100vh - 120px));
+    transform: none;
   }
 
   .intro-title {
-    font-size: clamp(1.6rem, 5vw, 3.8rem);
+    font-size: min(clamp(1.6rem, 5vw, 3.8rem), 5.4vh);
     line-height: 1.25;
   }
 }
 
 @media (max-width: 480px) {
   .intro-container {
-    padding: 0 8px;
+    padding: 72px 8px 0;
   }
 
   .intro-wrapper {
-    max-width: 98vw;
-    transform: translateY(-15px);
+    max-width: min(98vw, calc(100vh - 105px));
+    transform: none;
   }
 
   .intro-title {
-    font-size: clamp(1.3rem, 4.8vw, 2.5rem);
+    font-size: min(clamp(1.15rem, 5.4vw, 2.5rem), 5vh);
     line-height: 1.25;
+  }
+}
+
+/* Very narrow phones — the headline has a hard <br> so it cannot reflow */
+@media (max-width: 360px) {
+  .intro-title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+}
+
+/* Landscape phones — the pull-up and title both need to shrink */
+@media (orientation: landscape) and (max-height: 560px) {
+  .intro-container {
+    padding-top: 62px;
+  }
+
+  .intro-wrapper {
+    max-width: 78vh;
+    transform: none;
+  }
+
+  .intro-title {
+    font-size: clamp(1rem, 5.2vh, 2.2rem);
   }
 }

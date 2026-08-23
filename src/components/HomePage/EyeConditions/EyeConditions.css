@@ -2,9 +2,6 @@
    EYE CONDITIONS
 ========================================================= */
 
-* {
-  box-sizing: border-box;
-}
 
 
 /* =========================================================
@@ -189,9 +186,9 @@
 
   font-size:
     clamp(
-      68px,
+      2.4rem,
       7.5vw,
-      125px 
+      125px
     );
 
   line-height: 1;
@@ -209,52 +206,166 @@
 
 
 /* =========================================================
-   TABLET
+   INTRO TITLE — one fluid scale across the whole range,
+   replacing the old stepped 42px / 36px overrides.
 ========================================================= */
 
-@media (max-width: 900px) {
+.ec-intro-title {
+  /* The 20vh cap only binds on short desktop viewports (below ~760px tall),
+     where this title would otherwise outgrow the 100vh pinned section. */
+  font-size: min(clamp(2.1rem, 6.5vw, 7.2rem), 20vh);
+}
 
-  .ec-intro {
-    width: 55vw;
 
-    padding-left: 24px;
+/* =========================================================
+   RESPONSIVE
+   Ladder: 1600 / 1280 / 1024 / 768 / 480
+
+   >=1025px : GSAP pins the section and scrubs the track
+              horizontally while each card expands.
+   <=1024px : the track becomes a vertical column, every card
+              is already expanded, nothing animates.
+========================================================= */
+
+/* Short desktop viewports — keep the image and title inside 100vh */
+@media (min-width: 1025px) and (max-height: 760px) {
+
+  .ec-bottom {
+    height: 30vh;
   }
 
-  .ec-intro-title {
-    font-size: 42px;
-  }
-
-  .ec-name {
-    font-size: 8vw;
+  .ec-image-wrap {
+    bottom: 30vh;
   }
 
 }
 
 
 /* =========================================================
-   MOBILE
+   TABLET & PHONE — vertical stack
 ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
 
-  .ec-intro {
-    width: 70vw;
+  /* Release the pin: section grows with its content */
+  .ec-section {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 64px 0;
   }
 
-  .ec-intro-title {
-    font-size: 36px;
+  .ec-track {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: stretch;
+    /* No horizontal scrub at this size */
+    transform: none;
+  }
+
+  .ec-intro {
+    width: 100%;
+    height: auto;
+    padding: 0 6vw 44px;
+  }
+
+  /* Cards are full width and already expanded */
+  .ec-card {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
   }
 
   .ec-image-wrap {
-    bottom: 38vh;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: 44vh;
+    min-height: 260px;
   }
 
   .ec-bottom {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    padding: 28px 22px 34px;
+  }
+
+  /* The base rule hides this until GSAP reveals it, and forbids
+     wrapping — both have to go once the animation is off. */
+  .ec-name {
+    opacity: 1;
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-size: clamp(2.1rem, 7vw, 3.6rem);
+    letter-spacing: -0.03em;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .ec-section {
+    padding: 52px 0;
+  }
+
+  .ec-intro {
+    padding: 0 6vw 34px;
+  }
+
+  .ec-image-wrap {
     height: 38vh;
+    min-height: 220px;
+  }
+
+  .ec-bottom {
+    padding: 24px 20px 30px;
   }
 
   .ec-name {
-    font-size: 11vw;
+    font-size: clamp(1.9rem, 8.4vw, 3rem);
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .ec-section {
+    padding: 40px 0;
+  }
+
+  .ec-intro {
+    padding: 0 5vw 26px;
+  }
+
+  .ec-image-wrap {
+    height: 34vh;
+    min-height: 190px;
+  }
+
+  .ec-bottom {
+    padding: 20px 16px 26px;
+  }
+
+  .ec-name {
+    font-size: clamp(1.7rem, 9vw, 2.4rem);
+  }
+
+}
+
+
+/* Landscape phones — vh-based image heights get very short here */
+@media (max-width: 1024px) and (orientation: landscape) and (max-height: 560px) {
+
+  .ec-image-wrap {
+    height: 62vh;
+    min-height: 200px;
   }
 
 }

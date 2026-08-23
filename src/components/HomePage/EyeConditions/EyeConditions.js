@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./EyeConditions.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -53,8 +54,15 @@ const EyeConditions = () => {
 
     if (!section || !track) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Desktop only. At <=1024px the track is a plain vertical column
+    // (see EyeConditions.css) with every card already expanded, and no
+    // scroll-jacking happens. matchMedia reverts the inline widths,
+    // heights and opacities set below when the query stops matching.
+    mm.add(DESKTOP_MQ, () => {
       const cards = gsap.utils.toArray(".ec-card");
+      const intro = section.querySelector(".ec-intro");
 
       const vw = () => window.innerWidth;
       const vh = () => window.innerHeight;
@@ -75,43 +83,53 @@ const EyeConditions = () => {
 
       // ---------------------------------------------
       // INITIAL STATE
+      //
+      // Re-applied on every ScrollTrigger refresh so the width of the
+      // first card tracks the viewport instead of freezing at its
+      // mount-time value (onUpdate deliberately skips index 0).
       // ---------------------------------------------
 
-      cards.forEach((card, index) => {
-        const imageWrap = card.querySelector(".ec-image-wrap");
-        const title = card.querySelector(".ec-name");
+      const setInitial = () => {
+        cards.forEach((card, index) => {
+          const imageWrap = card.querySelector(".ec-image-wrap");
+          const title = card.querySelector(".ec-name");
 
-        if (index === 0) {
-          // First card starts already half expanded
+          if (index === 0) {
+            // First card starts already half expanded
 
-          gsap.set(card, {
-            width: FULL_WIDTH(),
-          });
+            gsap.set(card, {
+              width: FULL_WIDTH(),
+            });
 
-          gsap.set(imageWrap, {
-            height: MAX_IMAGE_HEIGHT(),
-          });
+            gsap.set(imageWrap, {
+              height: MAX_IMAGE_HEIGHT(),
+            });
 
-          // First title hidden initially
-          gsap.set(title, {
-            opacity: 0,
-          });
-        } else {
-          // Remaining cards start small
+            // First title hidden initially
+            gsap.set(title, {
+              opacity: 0,
+            });
+          } else {
+            // Remaining cards start small
 
-          gsap.set(card, {
-            width: SMALL_WIDTH(),
-          });
+            gsap.set(card, {
+              width: SMALL_WIDTH(),
+            });
 
-          gsap.set(imageWrap, {
-            height: SMALL_IMAGE_HEIGHT(),
-          });
+            gsap.set(imageWrap, {
+              height: SMALL_IMAGE_HEIGHT(),
+            });
 
-          gsap.set(title, {
-            opacity: 0,
-          });
-        }
-      });
+            gsap.set(title, {
+              opacity: 0,
+            });
+          }
+        });
+      };
+
+      setInitial();
+
+      ScrollTrigger.addEventListener("refreshInit", setInitial);
 
       // ---------------------------------------------
       // SCROLL TRIGGER
@@ -246,10 +264,19 @@ const EyeConditions = () => {
 
       // ---------------------------------------------
       // TRACK MOVEMENT
+      //
+      // Measured from real geometry rather than a fixed multiplier, so
+      // the last card lands flush at the right edge at any desktop width
+      // or zoom level. At the end of the scroll every card is FULL_WIDTH.
       // ---------------------------------------------
 
       gsap.to(track, {
-        x: () => -(vw() * 2.45),
+        x: () => {
+          const introWidth = intro ? intro.offsetWidth : 0;
+          const endWidth = introWidth + cards.length * FULL_WIDTH();
+
+          return -Math.max(0, endWidth - vw());
+        },
 
         ease: "none",
 
@@ -257,9 +284,13 @@ const EyeConditions = () => {
       });
 
       ScrollTrigger.refresh();
-    }, section);
 
-    return () => ctx.revert();
+      return () => {
+        ScrollTrigger.removeEventListener("refreshInit", setInitial);
+      };
+    });
+
+    return () => mm.revert();
   }, [conditions.length]);
 
   return (
@@ -301,6 +332,7 @@ const EyeConditions = () => {
                 src={condition.image}
                 alt={condition.name}
                 className="ec-image"
+                loading="lazy"
               />
             </div>
 

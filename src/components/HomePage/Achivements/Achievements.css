@@ -56,7 +56,6 @@
   /* Fixed height — tall cards like reference */
   height: 560px;
   width: 100%;
-  cursor: pointer;
   will-change: transform, opacity;
 }
 
@@ -74,9 +73,13 @@
               transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ach-card:hover .ach-img {
-  filter: grayscale(0%) brightness(1);
-  transform: scale(1.05);
+/* Hover reveal is the only thing that lifts the grayscale filter, so it
+   must be gated — touch devices get the colour end state further down. */
+@media (hover: hover) and (pointer: fine) {
+  .ach-card:hover .ach-img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.05);
+  }
 }
 
 /* ── Dark gradient at bottom for text readability ── */
@@ -120,26 +123,89 @@
 }
 
 /* ============================================================
-   Responsive
+   Touch devices — no hover, so show the colour end state.
+   Without this the six awards stay permanently grey.
    ============================================================ */
+@media (hover: none) {
+  .ach-img {
+    filter: none;
+  }
+}
+
+/* ============================================================
+   Heading rhythm — one fluid step instead of a 116px -> 40px jump
+   ============================================================ */
+.ach-heading {
+  margin-bottom: clamp(40px, 7vw, 116px);
+}
+
+/* ============================================================
+   Responsive
+   Ladder: 1600 / 1280 / 1024 / 900 / 600 / 480
+
+   >=1025px : GSAP flies the cards in from off-screen
+   <=1024px : cards render in place, no animation
+   ============================================================ */
+
+@media (max-width: 1280px) {
+  .ach-grid { gap: 32px; }
+  .ach-card { height: 480px; }
+}
+
+@media (max-width: 1024px) {
+  .ach-section { padding: 84px 0 100px; }
+  .ach-title   { font-size: clamp(2.6rem, 7vw, 5.5rem); }
+  .ach-grid    { gap: 24px; }
+
+  /* Fixed pixel heights crop the overlay text once the fonts shrink at a
+     different rate than the box — go ratio-driven instead. */
+  .ach-card {
+    height: auto;
+    aspect-ratio: 16 / 11;
+    min-height: 380px;
+  }
+
+  .ach-text { padding: 24px 24px 22px; }
+}
+
 @media (max-width: 900px) {
   .ach-section    { padding: 72px 0 90px; }
-  .ach-title      { font-size: clamp(2.5rem, 8vw, 5rem); }
-  .ach-heading    { margin-bottom: 40px; }
-  .ach-grid       { gap: 14px; }
-  .ach-card       { height: 440px; }
-  .ach-card-title { font-size: 1.1rem; }
-  .ach-card-desc  { font-size: 0.82rem; }
+  .ach-title      { font-size: clamp(2.4rem, 7.6vw, 4.5rem); }
+  .ach-grid       { gap: 16px; }
+  .ach-card       { min-height: 320px; }
+  .ach-card-title { font-size: clamp(1.05rem, 2.6vw, 1.4rem); }
+  .ach-card-desc  { font-size: clamp(0.82rem, 1.9vw, 1rem); }
   .ach-text       { padding: 20px 20px 18px; }
 }
 
 @media (max-width: 600px) {
-  .ach-section  { padding: 56px 0 70px; }
+  .ach-section { padding: 56px 0 70px; }
+
   .ach-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 14px;
   }
-  .ach-card     { height: 360px; }
-  .ach-title    { font-size: clamp(2rem, 10vw, 3.5rem); }
-  .ach-heading  { margin-bottom: 28px; }
+
+  .ach-card {
+    aspect-ratio: 4 / 3;
+    min-height: 300px;
+  }
+
+  .ach-title      { font-size: clamp(2rem, 9vw, 3.2rem); }
+  .ach-card-title { font-size: 1.15rem; }
+  .ach-card-desc  { font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .ach-section { padding: 44px 0 56px; }
+
+  .ach-card {
+    aspect-ratio: 5 / 4;
+    min-height: 260px;
+    border-radius: 14px;
+  }
+
+  .ach-text       { padding: 18px 16px 16px; }
+  .ach-card-title { font-size: 1.05rem; margin-bottom: 8px; }
+  .ach-card-desc  { font-size: 0.85rem; line-height: 1.5; }
 }

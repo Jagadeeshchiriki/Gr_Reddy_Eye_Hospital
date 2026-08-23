@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import footerBg from '../../assets/images/HomePage/footerbg.png';
+import { scrollToTop } from '../../utils/smoothScroll';
 import './footer.css';
 
 function Footer() {
@@ -17,11 +18,9 @@ function Footer() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+  const handleScrollToTop = () => {
+    // Native smooth scrolling fights the Lenis loop and overshoots.
+    scrollToTop(false);
   };
 
   return (
@@ -124,7 +123,7 @@ function Footer() {
       {/* Floating Scroll to Top Button */}
       <button 
         className={`scroll-up-btn ${showScrollUp ? 'visible' : ''}`}
-        onClick={scrollToTop}
+        onClick={handleScrollToTop}
         aria-label="Scroll up to top"
         title="Scroll up to top"
       >

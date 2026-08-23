@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { scrollToTop } from '../../utils/smoothScroll';
 
 /**
  * ScrollToTop
@@ -10,7 +11,8 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Goes through Lenis when smooth scrolling is active, native otherwise.
+    scrollToTop(true);
   }, [pathname]);
 
   return null;

@@ -1,26 +1,32 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { DESKTOP_MQ } from '../../../utils/breakpoints';
 import './aboutcomponent.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Stops mobile browser URL-bar collapse (which changes innerHeight) from
+// firing a ScrollTrigger refresh mid-scroll.
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 function AboutComponent() {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const cards = cardsRef.current;
-      const isMobile = window.innerWidth <= 1025;
+    const mm = gsap.matchMedia();
 
-      // On mobile cards use left:50% so we need xPercent:-50 to keep them centered
-      const xPct = isMobile ? -50 : 0;
+    // Desktop only. Below 1025px the cards sit in normal vertical flow (see
+    // the max-width: 1024px block in aboutcomponent.css) and nothing animates.
+    // matchMedia reverts every gsap.set below when the query stops matching.
+    mm.add(DESKTOP_MQ, () => {
+      const cards = cardsRef.current;
 
       // Set all cards to start position: below + rotated + invisible
-      gsap.set(cards[0], { xPercent: xPct, y: 500, rotation: 8, opacity: 0 });
-      gsap.set(cards[1], { xPercent: xPct, y: 500, rotation: 8, opacity: 0 });
-      gsap.set(cards[2], { xPercent: xPct, y: 500, rotation: 8, opacity: 0 });
+      gsap.set(cards[0], { y: 500, rotation: 8, opacity: 0 });
+      gsap.set(cards[1], { y: 500, rotation: 8, opacity: 0 });
+      gsap.set(cards[2], { y: 500, rotation: 8, opacity: 0 });
 
       // Build the scroll-pinned timeline
       const tl = gsap.timeline({
@@ -31,12 +37,12 @@ function AboutComponent() {
           scrub: 1,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
       // Card 1 (White — 50K) enters first
       tl.to(cards[0], {
-        xPercent: xPct,
         y: 0,
         rotation: 0,
         opacity: 1,
@@ -48,7 +54,6 @@ function AboutComponent() {
       tl.to(
         cards[1],
         {
-          xPercent: xPct,
           y: 0,
           rotation: 0,
           opacity: 1,
@@ -62,7 +67,6 @@ function AboutComponent() {
       tl.to(
         cards[2],
         {
-          xPercent: xPct,
           y: 0,
           rotation: 0,
           opacity: 1,
@@ -71,9 +75,9 @@ function AboutComponent() {
         },
         '+=0.5'
       );
-    }, sectionRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
 

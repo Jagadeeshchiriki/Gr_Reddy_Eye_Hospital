@@ -109,7 +109,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: top top;
+  object-position: center top;
   border-radius: 18px;
   will-change: transform;
 }
@@ -206,41 +206,116 @@
 
 /* =========================================================
    Responsive
+   Ladder: 1600 / 1280 / 1024 / 768 / 480
+
+   >=1025px : GSAP pins the section and slides the track
+   <=1024px : cards stack vertically, nothing is pinned
+   =========================================================*/
+
+@media (max-width: 1280px) {
+  .doctors-wrapper { padding: 104px 4vw 44px; }
+  .doctor-content  { padding: 44px 24px; }
+}
+
+/* Short desktop viewports (e.g. 1366x768) — the 120px top padding
+   inside a 100vh pin leaves too little room for the card. */
+@media (min-width: 1025px) and (max-height: 820px) {
+  .doctors-wrapper { padding: 88px 5vw 32px; }
+  .doctors-header  { margin-bottom: 22px; }
+  .doctor-content  { padding: 30px 16px; }
+  .doctor-text-top { gap: 18px; margin-bottom: 18px; }
+  .doctor-desc     { line-height: 1.5; }
+}
+
+/* =========================================================
+   Tablet & phone — unpinned vertical stack
    =========================================================*/
 @media (max-width: 1024px) {
-  .doctors-wrapper { padding: 40px 3vw 28px; }
-  .doctor-card {
-    width: 92vw;
-    grid-template-columns: 48% 52%;
+  /* Release the pin: wrapper grows with its content */
+  .doctors-wrapper {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 64px 5vw;
   }
-  .doctor-content { padding: 40px 32px; }
+
+  .doctors-header { margin-bottom: 32px; }
+
+  /* Track leaves absolute positioning and becomes normal flow */
+  .doctors-viewport {
+    position: static;
+    flex: none;
+  }
+
+  .doctors-track {
+    position: static;
+    flex-direction: column;
+    height: auto;
+    gap: 24px;
+    /* No horizontal slide at this size */
+    transform: none;
+  }
+
+  .doctor-card {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 0;
+  }
+
+  /* height: 100% collapses inside an auto-height grid row */
+  .doctor-photo-wrap {
+    height: auto;
+    aspect-ratio: 4 / 5;
+    padding: 16px;
+  }
+
+  .doctor-content {
+    height: auto;
+    padding: 28px 26px 32px;
+  }
+
+  .doctor-text-top {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .doctor-name { font-size: clamp(1.7rem, 4.4vw, 2.4rem); }
+  .doctor-role { font-size: clamp(1rem, 2.4vw, 1.25rem); }
+  .doctor-desc { font-size: clamp(0.98rem, 2.2vw, 1.15rem); }
+
+  /* Absolute placement would sit on top of the description now that
+     the card height is content-driven. */
+  .doctor-num {
+    position: static;
+    display: block;
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 768px) {
-  .doctors-wrapper { padding: 32px 4vw 24px; min-height: 640px; }
+  .doctors-wrapper { padding: 52px 5vw; }
 
-  .doctors-heading { font-size: 2rem; }
+  .doctors-header  { margin-bottom: 26px; }
+  .doctors-heading { font-size: clamp(1.8rem, 6.6vw, 2.4rem); }
 
-  .doctor-card {
-    width: 90vw;
-    grid-template-columns: 1fr;
-    grid-template-rows: 52% 48%;
-  }
+  .doctor-photo-wrap { aspect-ratio: 1 / 1; padding: 14px; }
 
-  .doctor-content { padding: 28px 24px; }
-
-  .doctor-name { font-size: 1.8rem; }
-  .doctor-role { font-size: 0.95rem; }
-  .doctor-desc { font-size: 0.9rem; }
+  .doctor-content { padding: 24px 22px 28px; }
 }
 
 @media (max-width: 480px) {
-  .doctors-wrapper { padding: 28px 16px 20px; }
+  .doctors-wrapper { padding: 40px 16px; }
 
-  .doctor-card { width: 90vw; border-radius: 18px; }
-
-  .doctor-content { padding: 22px 20px; }
+  .doctor-card { border-radius: 18px; }
 
   .doctor-photo-wrap { padding: 12px; }
   .doctor-img { border-radius: 12px; }
+
+  .doctor-content { padding: 20px 18px 24px; }
+
+  .doctor-text-top { gap: 10px; margin-bottom: 16px; }
 }

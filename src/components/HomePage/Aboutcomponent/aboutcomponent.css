@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: clamp(32px, 4vw, 72px);
   padding: 0 6% ;
   box-sizing: border-box;
 }
@@ -31,7 +32,7 @@
 
 .about-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(4.7rem, 6.5vw, 7.2rem);
+  font-size: clamp(2.6rem, 3.7vw, 4.4rem);
   font-weight: 700;
   color: #000000;
   line-height: 1.15;
@@ -45,7 +46,7 @@
   font-weight: 400;
   color: #333;
   line-height: 1.65;
-  margin-top: 88px;
+  margin-top: clamp(32px, 5vh, 88px);
   max-width: 810px;
 }
 
@@ -55,7 +56,10 @@
 .about-cards-visual {
   flex: 1;
   position: relative;
-  height: 560px;
+  /* card-blue sits at top: 60px, so the stack is one card plus that offset */
+  --about-stack-offset: 60px;
+  --about-card-h: min(750px, 74vh);
+  height: calc(var(--about-card-h) + var(--about-stack-offset));
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -68,7 +72,7 @@
 .about-card {
   position: absolute;
   width: 680px;
-  height: 750px;
+  height: var(--about-card-h);
   border-radius: 52px;
   padding: 50px 56px;
   box-sizing: border-box;
@@ -107,8 +111,8 @@
    Icon Badge — top right corner
    ===================================================== */
 .icon-circle {
-  width: 100px;
-  height: 100px;
+  width: min(100px, 11vh);
+  height: min(100px, 11vh);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -135,7 +139,7 @@
 
 .card-stat {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 12.5rem;
+  font-size: min(clamp(9rem, 10.4vw, 12.5rem), 21vh);
   font-weight: 500;
   line-height: 0.9;
   margin: 0 0 16px;
@@ -144,7 +148,7 @@
 
 .card-label {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1.95rem;
+  font-size: min(1.95rem, 3.6vh);
   font-weight: 400;
   margin: 0;
   opacity: 0.9;
@@ -152,27 +156,34 @@
 
 .card-desc {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1.95em;
+  font-size: min(1.95rem, 3.6vh);
   line-height: 1.55;
   opacity: 0.85;
   margin: 0;
 }
 
+/* Icon badge SVG scales with its circle */
+.icon-circle svg {
+  width: 54%;
+  height: 54%;
+}
+
 /* =====================================================
    Responsive
+   Ladder: 1600 / 1280 / 1024 / 768 / 480
+   >=1025px  : GSAP pins this section and fans the cards in
+   <=1024px  : cards sit in normal vertical flow, no animation
    ===================================================== */
 
 /* Large desktop — slight scale down to keep cards on screen */
 @media (max-width: 1600px) {
-  .about-cards-visual { height: 720px; }
+  .about-cards-visual { --about-card-h: min(680px, 74vh); }
 
   .about-card {
     width: 580px;
-    height: 680px;
     padding: 46px 50px;
   }
 
-  .card-stat  { font-size: 10.5rem; }
   .card-label { font-size: 1.7rem; }
   .card-desc  { font-size: 1.7rem; }
 }
@@ -180,27 +191,49 @@
 @media (max-width: 1280px) {
   .about-inner { padding: 0 5%; }
 
-  .about-cards-visual { height: 640px; }
+  .about-cards-visual { --about-card-h: min(600px, 74vh); }
 
   .about-card {
     width: 500px;
-    height: 600px;
     padding: 40px 44px;
     border-radius: 44px;
   }
 
-  .card-stat  { font-size: 9rem; }
   .card-label { font-size: 1.5rem; }
   .card-desc  { font-size: 1.5rem; }
 }
 
-/* Tablet & below — column layout, cards centered, full-width */
-@media (max-width: 1025px) {
+/* Short desktop viewports — the card height itself is handled by the
+   min(px, 74vh) cap above; this only tightens the internal spacing so the
+   contents still breathe inside a shorter card. */
+@media (min-width: 1025px) and (max-height: 900px) {
+  .about-card {
+    padding: 34px 40px;
+    border-radius: 40px;
+  }
+
+  .card-body { margin-top: 12px; }
+}
+
+/* =====================================================
+   Tablet & phone — unpinned, single column, natural height
+   ===================================================== */
+@media (max-width: 1024px) {
+  /* Release the pin: the section grows with its content */
+  .about-scroll-section {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 72px 0;
+    margin-bottom: 0;
+  }
+
   .about-inner {
+    height: auto;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 60px 5% 40px;
+    padding: 0 5%;
     text-align: center;
     gap: 48px;
   }
@@ -213,86 +246,98 @@
   }
 
   .about-subtitle {
-    margin-top: 40px;
+    margin-top: 32px;
     max-width: 90%;
   }
 
-  /* Cards visual: full width, tall enough to show stacked cards */
+  /* Cards leave the absolute stack and become normal flow blocks */
   .about-cards-visual {
     width: 100%;
-    height: 700px;
-    justify-content: center;
-    position: relative;
+    height: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
   }
 
-  /* Cards: 90% of screen width, centered, large */
   .about-card {
-    width: 90%;
-    max-width: 600px;
-    height: 640px;
+    position: static;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    min-height: 0;
     padding: 48px 44px;
     border-radius: 48px;
-    /* Override absolute right positioning — center instead */
-    right: auto !important;
-    left: 50%;
-    transform-origin: center center;
-    /* GSAP will override transform, but we set the base position */
+    /* Cards are visible without the reveal animation. Also guards the
+       moment of crossing the breakpoint before matchMedia reverts. */
+    transform: none;
+    opacity: 1;
   }
 
-  /* Vertical fan offsets when stacked */
-  .card-white  { top: 0   !important; }
-  .card-yellow { top: 40px !important; }
-  .card-blue   { top: 80px !important; }
+  /* The desktop card has a fixed height and pushes the description to the
+     bottom with space-between; with content-driven height it needs an
+     explicit gap instead. */
+  .card-body {
+    margin-top: 32px;
+    gap: 18px;
+  }
 
-  .card-stat  { font-size: 10rem; }
-  .card-label { font-size: 1.8rem; }
-  .card-desc  { font-size: 1.6rem; }
+  .card-stat  { font-size: clamp(5.5rem, 17vw, 10rem); }
+  .card-label { font-size: clamp(1.25rem, 3.4vw, 1.8rem); }
+  .card-desc  { font-size: clamp(1.05rem, 3vw, 1.6rem); }
 
   .icon-circle { width: 80px; height: 80px; }
 }
 
 @media (max-width: 768px) {
+  .about-scroll-section { padding: 56px 0; }
+
   .about-inner {
-    padding: 50px 4% 32px;
+    padding: 0 4%;
     gap: 36px;
   }
 
-  .about-cards-visual { height: 620px; }
-
   .about-card {
-    width: 92%;
     max-width: 480px;
-    height: 560px;
     padding: 40px 36px;
     border-radius: 40px;
   }
-
-  .card-stat  { font-size: 8rem; }
-  .card-label { font-size: 1.55rem; }
-  .card-desc  { font-size: 1.4rem; }
 
   .icon-circle { width: 68px; height: 68px; }
 }
 
 @media (max-width: 480px) {
+  .about-scroll-section { padding: 44px 0; }
+
   .about-inner {
-    padding: 40px 4% 28px;
+    padding: 0 4%;
     gap: 28px;
   }
 
-  .about-cards-visual { height: 540px; }
+  .about-subtitle { margin-top: 24px; }
 
   .about-card {
-    width: 94%;
-    max-width: 380px;
-    height: 480px;
-    padding: 32px 28px;
+    max-width: 100%;
+    padding: 30px 26px;
     border-radius: 32px;
   }
 
-  .card-stat  { font-size: 6.5rem; }
-  .card-label { font-size: 1.3rem; }
-  .card-desc  { font-size: 1.15rem; }
+  .card-body { margin-top: 24px; }
 
   .icon-circle { width: 56px; height: 56px; }
+}
+
+/* Heading scale for tablet & phone — the desktop clamp floor (4.7rem / 75px)
+   is far too large once the layout goes single column. */
+@media (max-width: 1024px) {
+  .about-title    { font-size: clamp(2.6rem, 7.4vw, 4.4rem); }
+  .about-subtitle { font-size: clamp(1.05rem, 2.6vw, 1.5rem); }
+}
+
+@media (max-width: 480px) {
+  .about-title    { font-size: clamp(1.9rem, 8.6vw, 2.6rem); }
+  .about-subtitle { font-size: clamp(0.98rem, 4vw, 1.15rem); }
 }

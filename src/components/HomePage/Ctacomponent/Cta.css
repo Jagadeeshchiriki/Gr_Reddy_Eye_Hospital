@@ -1,26 +1,25 @@
 /* ============================================================
-   CTA Section — full-width image, responsive height
+   CTA Section — full-bleed image, intrinsic aspect ratio
    ============================================================ */
 
 .cta-section {
   width: 100%;
-  height: 100%;
+  /* The parent has no height, so `height: 100%` resolved to auto anyway.
+     Stating it explicitly keeps the image at its natural ratio even if a
+     parent later gains a height. */
+  height: auto;
   overflow: hidden;
   display: block;
   line-height: 0;
 }
 
+/* NOTE: the CTA wording is baked into CTA.png, so the image is scaled
+   rather than cropped — cropping (object-fit: cover) would cut the text
+   off on narrow screens. On small phones the baked-in text is therefore
+   small; a proper fix needs a mobile-cropped source via <picture>, or
+   live HTML text over the image. */
 .cta-img {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
-  object-position: center center;
-}
-
-/* Mobile — focus on top of image where subject is */
-@media (max-width: 600px) {
-  .cta-img {
-    object-position: center top;
-  }
 }

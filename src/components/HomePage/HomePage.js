@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../HeaderComponent/header';
 import Footer from '../FooterComponent/footer';
 import Intro from './Introcomponent/Intro';
@@ -12,7 +13,21 @@ import './HomePage.css';
 
 function HomePage() {
   useEffect(() => {
-    console.log('HomePage Component');
+    // Section heights depend on 100vh (the hero is capped to one screen), so
+    // the pinned ScrollTriggers created in each child's useLayoutEffect can be
+    // built against a layout that has not settled yet — which left About
+    // pinned at scroll 0 on some viewport sizes (e.g. 1905x945). Two frames
+    // after mount the layout is final, so re-measure once. At mount scrollY
+    // is 0, so this cannot move the page.
+    let inner = 0;
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
+    return () => {
+      cancelAnimationFrame(outer);
+      cancelAnimationFrame(inner);
+    };
   }, []);
 
   return (
