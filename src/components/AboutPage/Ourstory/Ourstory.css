@@ -1,0 +1,326 @@
+/* =========================================
+   Our Story Section
+   ========================================= */
+
+.our-story {
+  min-height: 100vh;
+  background: #f5f4ec;
+  color: #111111;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding-bottom: 128px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.our-story ::selection {
+  background: #e8aa6a;
+  color: #ffffff;
+}
+
+
+/* =========================================
+   Container
+
+   Mobile:  single column (flex-col)
+   Desktop: two columns side by side (flex-row)
+   ========================================= */
+
+.our-story-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+
+/* =========================================
+   Left Sidebar Column
+
+   position: relative is required so the
+   JS-controlled position:absolute fallback
+   (when section is ending) is relative to
+   this column, not the viewport.
+   ========================================= */
+
+.our-story-sidebar {
+  width: 100%;
+  position: relative; /* anchor for absolute fallback */
+}
+
+
+/* =========================================
+   Sticky Inner Wrapper
+
+   position is controlled by JS scroll handler.
+   Default is relative (mobile / before scroll).
+   ========================================= */
+
+.our-story-sticky {
+  position: relative;
+  margin-bottom: 200px;
+}
+
+
+/* =========================================
+   Heading ("Our Story")
+   ========================================= */
+
+.our-story-heading {
+  margin: 0 0 36px;
+  color: #000000;
+  font-size: 96px;
+  line-height: 1.0;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+
+/* =========================================
+   Tagline
+   ========================================= */
+
+.our-story-tagline {
+  margin: 0;
+  color: #000000;
+  font-size: 40px;
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+
+/* =========================================
+   Right Content Column
+   ========================================= */
+
+.our-story-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+/* =========================================
+   Individual Section
+   ========================================= */
+
+.our-story-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+/* =========================================
+   Section Title
+   ========================================= */
+
+.our-story-section-title {
+  margin: 0;
+  color: #000000;
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+
+/* =========================================
+   Description
+   ========================================= */
+
+.our-story-description {
+  margin: 0;
+  color: #222222;
+  font-size: 24px;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   Bullet List
+   ========================================= */
+
+.our-story-bullets {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* =========================================
+   Bullet Item
+   ========================================= */
+
+.our-story-bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: #222222;
+  font-size: 24px;
+  line-height: 1.625;
+}
+
+
+/* =========================================
+   Bullet Dot
+   ========================================= */
+
+.our-story-dot {
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  min-height: 6px;
+  margin-top: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e3a869;
+}
+
+
+/* =========================================
+   Bullet Text
+   ========================================= */
+
+.our-story-bullet-text {
+  line-height: 1.625;
+}
+
+.our-story-bullet-text strong {
+  color: #000000;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   Tablet / Desktop  (≥ 768px)
+   Two-column layout, sticky kicks in
+   ========================================= */
+
+@media (min-width: 768px) {
+  .our-story-container {
+    padding: 128px 48px;
+    flex-direction: row;       /* side-by-side columns */
+    align-items: flex-start;   /* do NOT stretch children — sticky needs this */
+    gap: 80px;
+  }
+
+  .our-story-sidebar {
+    width: 41.666%;            /* ~5/12 */
+    flex-shrink: 0;
+  }
+
+  .our-story-sticky {
+    top: 128px;                /* slightly more offset on larger screens */
+  }
+
+  .our-story-heading {
+    margin-bottom: 48px;
+    font-size: 80px;
+  }
+
+  .our-story-tagline {
+    font-size: 32px;
+  }
+
+  .our-story-content {
+    flex: 1;
+    padding-top: 12px;
+    gap: 120px;
+  }
+
+  .our-story-section-title {
+    font-size: 38px;
+  }
+
+  .our-story-description {
+    font-size: 24px;
+  }
+
+  .our-story-bullet {
+    font-size: 24px;
+  }
+}
+
+
+/* =========================================
+   Large Desktop  (≥ 1024px)
+   ========================================= */
+
+@media (min-width: 1024px) {
+  .our-story-container {
+    padding-left: 96px;
+    padding-right: 96px;
+    gap: 128px;
+  }
+
+  .our-story-sidebar {
+    width: 45%;
+  }
+
+  .our-story-heading {
+    font-size: 94px;
+  }
+
+  .our-story-tagline {
+    font-size: 38px;
+  }
+
+  .our-story-section-title {
+    font-size: 40px;
+  }
+
+  .our-story-description {
+    font-size: 24px;
+  }
+
+  .our-story-bullet {
+    font-size: 24px;
+  }
+}
+
+
+/* =========================================
+   Mobile  (≤ 767px)
+   Single column, sticky disabled
+   ========================================= */
+
+@media (max-width: 767px) {
+  .our-story {
+    padding-bottom: 80px;
+  }
+
+  .our-story-container {
+    padding: 64px 24px;
+  }
+
+  .our-story-sticky {
+    position: relative;
+    top: auto;
+  }
+
+  .our-story-heading {
+    font-size: 52px;
+  }
+
+  .our-story-tagline {
+    font-size: 24px;
+  }
+
+  .our-story-content {
+    gap: 80px;
+  }
+
+  .our-story-section-title {
+    font-size: 30px;
+  }
+
+  .our-story-description {
+    font-size: 18px;
+  }
+}

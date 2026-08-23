@@ -1,0 +1,145 @@
+/* ============================================================
+   Achievements Section — Full width, left-aligned, 6 cards
+   B&W default → Color on hover
+   ============================================================ */
+
+.ach-section {
+  width: 100%;
+  background: #f0ece0;
+  padding: 100px 0 120px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden; /* clips cards sliding in from outside */
+}
+
+/* Full width — no max-width, left aligned */
+.ach-container {
+  width: 100%;
+  padding: 0 5vw;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   Heading — large bold, left aligned
+   ============================================================ */
+.ach-heading {
+  margin-bottom: 116px;
+  text-align: left;
+}
+
+.ach-title {
+  margin: 0;
+  font-size: clamp(3rem, 6.5vw, 8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #0a0a0a;
+  text-align: left;
+}
+
+/* ============================================================
+   2-Column Grid — fills full container width
+   ============================================================ */
+.ach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  width: 100%;
+}
+
+/* ============================================================
+   Card — taller, full column width, image fills card
+   ============================================================ */
+.ach-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  /* Fixed height — tall cards like reference */
+  height: 560px;
+  width: 100%;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+/* ── Image: grayscale by default, color on hover ── */
+.ach-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(100%) brightness(0.85);
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ach-card:hover .ach-img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+/* ── Dark gradient at bottom for text readability ── */
+.ach-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.25) 55%,
+    rgba(0, 0, 0, 0.0)  100%
+  );
+  pointer-events: none;
+}
+
+/* ── Text at bottom of card ── */
+.ach-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 30px 26px;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.ach-card-title {
+  margin: 0 0 12px;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0em;
+}
+
+.ach-card-desc {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.3vw, 1.45rem);
+  line-height: 1.6;
+  max-width: 560px;
+  opacity: 0.88;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .ach-section    { padding: 72px 0 90px; }
+  .ach-title      { font-size: clamp(2.5rem, 8vw, 5rem); }
+  .ach-heading    { margin-bottom: 40px; }
+  .ach-grid       { gap: 14px; }
+  .ach-card       { height: 440px; }
+  .ach-card-title { font-size: 1.1rem; }
+  .ach-card-desc  { font-size: 0.82rem; }
+  .ach-text       { padding: 20px 20px 18px; }
+}
+
+@media (max-width: 600px) {
+  .ach-section  { padding: 56px 0 70px; }
+  .ach-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .ach-card     { height: 360px; }
+  .ach-title    { font-size: clamp(2rem, 10vw, 3.5rem); }
+  .ach-heading  { margin-bottom: 28px; }
+}

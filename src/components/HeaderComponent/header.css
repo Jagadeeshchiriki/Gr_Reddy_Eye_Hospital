@@ -1,40 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* Header Container */
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .header-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  transition: all 0.3s ease;
 
+  margin-top: 30px;
+
+  transition:
+    background-color 0.4s ease,
+    margin-top 0.4s ease;
 }
 
-
-/* Header Content Layout */
 .header-content {
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
   padding: 12px 80px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Logo Styling */
+
+/* =========================================================
+   LOGO
+========================================================= */
+
 .header-logo-link {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 1px;
+
   text-decoration: none;
+
+  position: relative;
+  z-index: 1100;
 }
 
 .header-logo-img {
-  height: 52px;
+  height: 70px;
   width: auto;
   object-fit: contain;
-  transition: transform 0.2s ease;
+
+  transition: transform 0.3s ease;
 }
 
 .header-logo-link:hover .header-logo-img {
@@ -45,187 +59,403 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   user-select: none;
 }
 
 .logo-title {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1.95rem;
-  font-weight: 400;
+
+  font-size: 2.65rem;
+  font-weight: 500;
+
   color: #0f3443;
-  letter-spacing: 1px;
+
+  letter-spacing: 0;
   line-height: 1.1;
+
   text-transform: uppercase;
 }
 
 .logo-subtitle {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1.2rem;
+
+
+  font-size: 1.6rem;
   font-weight: 400;
+
   color: #f7a600;
-  letter-spacing: 2.4px;
+
+  letter-spacing: 1.2px;
   line-height: 1.2;
+
   text-transform: uppercase;
+
   margin-top: 2px;
 }
 
-/* Hamburger Toggle Button */
+
+/* =========================================================
+   MENU BUTTON
+========================================================= */
+
 .menu-toggle-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
+  position: relative;
+  z-index: 1100;
+
+  width: 82px;
+  height: 82px;
+
+  padding: 10px;
+
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  border-radius: 6px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  align-items: flex-end;
+
+  gap: 8px;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  transition: transform 0.3s ease;
 }
 
 .menu-toggle-btn:hover {
-  background-color: rgba(15, 52, 67, 0.06);
+  transform: scale(1.05);
+}
+
+.menu-toggle-btn:focus {
+  outline: none;
 }
 
 .menu-toggle-btn:focus-visible {
   outline: 2px solid #0f3443;
-  outline-offset: 2px;
+  outline-offset: 4px;
 }
 
-.menu-icon {
+
+/* GSAP ANIMATED LINES */
+
+.menu-line {
   display: block;
-  transition: transform 0.3s ease;
+
+  height: 6px;
+
+  background: #0f3443;
+
+  border-radius: 10px;
+
+  transform-origin: center;
+
+  will-change: transform, width;
 }
 
-.menu-toggle-btn:hover .menu-icon {
-  transform: scale(1.05);
+.menu-line-1 {
+  width: 80px;
 }
 
-/* Nav Menu Drawer & Overlay */
-.nav-menu-overlay {
+.menu-line-2 {
+  width: 62px;
+}
+
+
+
+/* White lines when menu is open */
+
+.header-container.menu-open .menu-line {
+  background: #f7f3ec;
+}
+
+
+/* =========================================================
+   FULLSCREEN CIRCULAR MENU
+========================================================= */
+
+.menu-overlay {
   position: fixed;
-  top: 76px;
-  left: 0;
+
+  inset: 0;
+
   width: 100vw;
-  height: calc(100vh - 76px);
-  background-color: rgba(15, 52, 67, 0.4);
-  backdrop-filter: blur(4px);
+  height: 100vh;
+
+  background: #080e15;
+
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /*
+    Same circular reveal concept
+    as your HTML reference.
+  */
+  clip-path: circle(
+    0% at calc(100% - 4rem) 4rem
+  );
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  will-change: clip-path;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.fullscreen-nav {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 36px;
+
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  transform: translateX(100px);
+
+  will-change: transform, opacity;
+}
+
+.fullscreen-nav-link {
+  position: relative;
+
   display: flex;
-  justify-content: flex-end;
+  align-items: baseline;
+
+  gap: 18px;
+
+  text-decoration: none;
+
+  
+
+  font-size: clamp(
+    4rem,
+    8vw,
+    8rem
+  );
+
+  font-weight: 300;
+
+  line-height: 0.95;
+
+  font-style: italic;
+
+  color: rgb(255, 255, 255);
+
+  transition:
+    color 0.5s ease,
+    transform 0.5s ease;
 }
 
-.nav-menu-overlay.open {
-  opacity: 1;
-  visibility: visible;
-}
+.fullscreen-nav-link span {
 
-.nav-menu {
-  width: 100%;
-  max-width: 360px;
-  background-color: #F5F1E4;
-  height: 100%;
-  padding: 32px 28px;
-  box-shadow: -4px 0 25px rgba(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
+  font-size: 10px;
 
-.nav-menu-overlay.open .nav-menu {
-  transform: translateX(0);
-}
+  font-style: normal;
 
-.nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.nav-link {
-  display: block;
-  font-family: inherit;
-  font-size: 1.05rem;
   font-weight: 500;
-  color: #0f3443;
-  text-decoration: none;
-  padding: 12px 16px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+
+  letter-spacing: 0.25em;
+
+  color: #c5a059;
+
+  opacity: 0.8;
+
+  transform: translateY(-8px);
 }
 
-.nav-link:hover,
-.nav-link.active {
-  background-color: rgba(15, 52, 67, 0.05);
-  color: #006699;
-  padding-left: 20px;
+.fullscreen-nav-link:hover {
+  color: #c5a059;
+
+  transform: translateX(18px);
 }
 
 
 
-.btn-appointment {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background-color: #0f3443;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 14px 24px;
-  border-radius: 30px;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(15, 52, 67, 0.25);
-  transition: all 0.25s ease;
+/* =========================================================
+   SCROLLED HEADER
+========================================================= */
+
+.header-container.scrolled {
+  margin-top: 10px;
 }
 
-.btn-appointment:hover {
-  background-color: #e69138;
-  box-shadow: 0 6px 16px rgba(230, 145, 56, 0.35);
-  transform: translateY(-2px);
+.header-container.scrolled .header-content {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
-/* Screen size adaptations */
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 769px) {
+
+  .fullscreen-nav {
+    min-width: 600px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .header-content {
+    padding: 12px 40px;
+  }
+
+  .logo-title {
+    font-size: 1.9rem;
+  }
+
+  .logo-subtitle {
+    font-size: 1rem;
+  }
+
+  .header-logo-img {
+    height: 52px;
+  }
+
+  .fullscreen-nav-link {
+    font-size: clamp(
+      3.5rem,
+      10vw,
+      6rem
+    );
+  }
+
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 768px) {
+
+  .header-container {
+    margin-top: 15px;
+  }
+
+  .header-container.scrolled {
+    margin-top: 8px;
+  }
+
   .header-content {
     padding: 10px 24px;
   }
 
+
+  /* Logo */
+
   .header-logo-link {
-    gap: 8px;
+    gap: 6px;
   }
 
   .header-logo-img {
-    height: 42px;
+    height: 44px;
   }
 
   .logo-title {
-    font-size: 1.2rem;
-    letter-spacing: 0.8px;
+    font-size: 1.25rem;
+
+    letter-spacing: 0.5px;
   }
 
   .logo-subtitle {
-    font-size: 0.58rem;
-    letter-spacing: 2.6px;
+    font-size: 0.6rem;
+
+    letter-spacing: 2px;
   }
+
+
+  /* Button */
+
+  .menu-toggle-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+
+  /* Fullscreen menu */
+
+  .menu-overlay {
+    clip-path: circle(
+      0% at calc(100% - 2.5rem) 2.5rem
+    );
+  }
+
+  .fullscreen-nav {
+    width: 100%;
+
+    padding: 0 30px;
+
+    gap: 18px;
+  }
+
+  .fullscreen-nav-link {
+    font-size: clamp(
+      3.5rem,
+      16vw,
+      5rem
+    );
+
+    gap: 10px;
+  }
+
+  .fullscreen-nav-link span {
+    font-size: 8px;
+  }
+
+  .fullscreen-nav-link:hover {
+    transform: translateX(8px);
+  }
+
+
 }
 
-@media (max-width: 600px) {
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
   .header-content {
-    padding: 10px 16px;
+    padding: 8px 16px;
   }
 
-  .nav-menu-overlay {
-    top: 62px;
-    height: calc(100vh - 62px);
+  .header-logo-img {
+    height: 40px;
   }
 
-  .nav-menu {
-    max-width: 100%;
+  .logo-title {
+    font-size: 1.05rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.5rem;
+
+    letter-spacing: 1.8px;
+  }
+
+  .fullscreen-nav {
+    padding: 0 22px;
+  }
+
+  .fullscreen-nav-link {
+    font-size: 3.3rem;
   }
 }

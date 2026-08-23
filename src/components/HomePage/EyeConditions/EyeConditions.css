@@ -1,0 +1,260 @@
+/* =========================================================
+   EYE CONDITIONS
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.ec-section {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background: #f4f0e7;
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+}
+
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.ec-track {
+  display: flex;
+
+  width: max-content;
+  height: 100vh;
+
+  align-items: stretch;
+
+  will-change: transform;
+}
+
+
+/* =========================================================
+   INTRO / HEADING
+========================================================= */
+
+.ec-intro {
+  position: relative;
+
+  width: 45vw;
+  height: 100vh;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  padding-left: 6vw;
+
+  background: #f4f0e7;
+}
+
+
+.ec-intro-title {
+  margin: 0;
+
+  font-size:
+    clamp(
+      4.7rem,
+      6.5vw,
+      7.2rem
+    );
+
+  line-height: 1.23;
+
+  letter-spacing: 0.01em;
+
+  font-weight: 600;
+
+  color: #080808;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.ec-card {
+  position: relative;
+
+  height: 100vh;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  will-change: width;
+}
+
+
+/* =========================================================
+   IMAGE WRAPPER
+
+   Image grows from bottom → top.
+
+   Bottom stays at 35vh.
+========================================================= */
+
+.ec-image-wrap {
+  position: absolute;
+
+  left: 0;
+
+  bottom: 35vh;
+
+  width: 100%;
+
+  height: 20vh;
+
+  overflow: hidden;
+
+  will-change: height;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.ec-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center center;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BOTTOM TEXT AREA
+========================================================= */
+
+.ec-bottom {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 35vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 20px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CONDITION NAME
+
+   Normal appearance.
+
+   No transform.
+   No scale.
+   No transition.
+========================================================= */
+
+.ec-name {
+  margin: 0;
+
+  font-size:
+    clamp(
+      68px,
+      7.5vw,
+      125px 
+    );
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  letter-spacing: -0.055em;
+
+  white-space: nowrap;
+
+  text-align: center;
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ec-intro {
+    width: 55vw;
+
+    padding-left: 24px;
+  }
+
+  .ec-intro-title {
+    font-size: 42px;
+  }
+
+  .ec-name {
+    font-size: 8vw;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .ec-intro {
+    width: 70vw;
+  }
+
+  .ec-intro-title {
+    font-size: 36px;
+  }
+
+  .ec-image-wrap {
+    bottom: 38vh;
+  }
+
+  .ec-bottom {
+    height: 38vh;
+  }
+
+  .ec-name {
+    font-size: 11vw;
+  }
+
+}

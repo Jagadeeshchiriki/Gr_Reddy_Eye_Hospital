@@ -1,0 +1,246 @@
+/* =========================================================
+   Doctors Section
+   =========================================================*/
+
+.doctors-section {
+  position: relative;
+  width: 100%;
+  background: #f3f0e6;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Pinned full-height wrapper */
+.doctors-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  padding: 120px 5vw 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   Header
+   =========================================================*/
+.doctors-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-shrink: 0;
+}
+
+.doctors-heading {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #080808;
+}
+
+.doctors-count {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #888;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   Viewport — clips the track
+   =========================================================*/
+.doctors-viewport {
+  flex: 1;
+  position: relative;
+  overflow: visible;
+  width: 100%;
+}
+
+/* =========================================================
+   Track — horizontal flex row, GSAP translates it
+   =========================================================*/
+.doctors-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+  will-change: transform;
+}
+
+/* =========================================================
+   Doctor Card — 90vw wide, white background
+   Next card peeks from the right (remaining 10vw - gap)
+   =========================================================*/
+.doctor-card {
+  flex: 0 0 auto;
+  width: 95vw;
+  max-width: 1900px;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  display: grid;
+  /* Photo takes 50% — large like reference image */
+  grid-template-columns: 50% 50%;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   Doctor Photo
+   =========================================================*/
+.doctor-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.doctor-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top top;
+  border-radius: 18px;
+  will-change: transform;
+}
+
+/* =========================================================
+   Doctor Content — right column
+   =========================================================*/
+.doctor-content {
+  position: relative;
+  height: 100%;
+  padding: 52px 16px;
+  box-sizing: border-box;
+  will-change: transform, opacity;
+}
+
+.doctor-text-top {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.doctor-name {
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: 0em;
+  line-height: 1;
+  color: #050505;
+}
+
+.doctor-role {
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.9rem);
+  font-weight: 400;
+  color: #030303;
+  line-height: 1.3;
+}
+
+.doctor-desc {
+  margin: 0;
+  font-size: clamp(1rem, 1.3vw, 1.8rem);
+  line-height: 1.7;
+  color: #222;
+  max-width: 740px;
+}
+
+.doctor-num {
+  position: absolute;
+  right: 36px;
+  bottom: 32px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #bbb;
+  font-weight: 500;
+}
+
+/* =========================================================
+   Footer — progress bar
+   =========================================================*/
+.doctors-footer {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 20px;
+  flex-shrink: 0;
+}
+
+.doctors-scroll-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #999;
+  white-space: nowrap;
+}
+
+.doctors-progress {
+  position: relative;
+  width: 140px;
+  height: 1px;
+  background: #d0cec5;
+  overflow: hidden;
+}
+
+.doctors-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* =========================================================
+   Responsive
+   =========================================================*/
+@media (max-width: 1024px) {
+  .doctors-wrapper { padding: 40px 3vw 28px; }
+  .doctor-card {
+    width: 92vw;
+    grid-template-columns: 48% 52%;
+  }
+  .doctor-content { padding: 40px 32px; }
+}
+
+@media (max-width: 768px) {
+  .doctors-wrapper { padding: 32px 4vw 24px; min-height: 640px; }
+
+  .doctors-heading { font-size: 2rem; }
+
+  .doctor-card {
+    width: 90vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 52% 48%;
+  }
+
+  .doctor-content { padding: 28px 24px; }
+
+  .doctor-name { font-size: 1.8rem; }
+  .doctor-role { font-size: 0.95rem; }
+  .doctor-desc { font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .doctors-wrapper { padding: 28px 16px 20px; }
+
+  .doctor-card { width: 90vw; border-radius: 18px; }
+
+  .doctor-content { padding: 22px 20px; }
+
+  .doctor-photo-wrap { padding: 12px; }
+  .doctor-img { border-radius: 12px; }
+}

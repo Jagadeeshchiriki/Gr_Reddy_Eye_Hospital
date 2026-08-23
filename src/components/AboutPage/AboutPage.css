@@ -1,0 +1,28 @@
+/* =========================================
+   About Page Root
+   ========================================= */
+
+/* IMPORTANT: overflow must NOT be hidden or auto
+   on any ancestor of a sticky element.
+   Use overflow-x: clip instead — it hides
+   horizontal overflow WITHOUT breaking sticky. */
+
+.AboutPage {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  background-color: #f5f4ec;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+
+/* =========================================
+   Main Content
+   ========================================= */
+
+/* overflow: visible is required so that
+   position: sticky inside OurStory works */
+.AboutPage .main-content {
+  overflow: visible;
+  width: 100%;
+}

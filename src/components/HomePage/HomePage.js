@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react';
 import Header from '../HeaderComponent/header';
 import Footer from '../FooterComponent/footer';
+import Intro from './Introcomponent/Intro';
+import AboutComponent from './Aboutcomponent/aboutcomponent';
+import EyeConditions from './EyeConditions/EyeConditions';
+import Doctors from './Doctors/Doctors';
+import Achievements from './Achivements/Achievements';
+import Cta from './Ctacomponent/Cta';
+
 import './HomePage.css';
 
 function HomePage() {
@@ -11,11 +18,13 @@ function HomePage() {
   return (
     <div className="HomePage">
       <Header />
-      <main className="main-content" style={{ padding: '40px 24px', textAlign: 'center' }}>
-        <h1 style={{ color: '#0f3443', marginTop: '20px' }}>Welcome to GR Reddy Eye Hospital</h1>
-        <p style={{ color: '#555', fontSize: '1.1rem', maxWidth: '600px', margin: '16px auto' }}>
-          Providing world-class eye care services with advanced medical technology and experienced specialists.
-        </p>
+      <main className="main-content">
+        <Intro />
+        <AboutComponent />
+        <EyeConditions />
+        <Doctors />
+        <Achievements />
+        <Cta />
       </main>
       <Footer />
     </div>

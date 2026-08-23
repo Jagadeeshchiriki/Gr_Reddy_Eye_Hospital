@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 import logo1 from '../../assets/images/HomePage/Logo1.png';
 import './header.css';
 
@@ -6,80 +8,222 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const overlayRef = useRef(null);
+  const navRef = useRef(null);
+  const bar1Ref = useRef(null);
+  const bar2Ref = useRef(null);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
+  const openMenuAnimation = () => {
+    const overlay = overlayRef.current;
+    const nav = navRef.current;
+    const bar1 = bar1Ref.current;
+    const bar2 = bar2Ref.current;
+
+    // Open circular overlay
+    gsap.set(overlay, {
+      pointerEvents: 'auto',
+    });
+
+    gsap.to(overlay, {
+      clipPath: 'circle(150% at calc(100% - 4rem) 4rem)',
+      duration: 0.8,
+      ease: 'power4.inOut',
+    });
+
+    // Hamburger → X
+    gsap.to(bar1, {
+      y: 5,
+      rotate: 45,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+
+    gsap.to(bar2, {
+      y: -5,
+      rotate: -45,
+      width: '62px',
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+
+    // Menu entrance
+    gsap.fromTo(
+      nav,
+      {
+        x: 100,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        delay: 0.3,
+        duration: 0.8,
+        ease: 'power4.out',
+      }
+    );
+  };
+
+  const closeMenuAnimation = () => {
+    const overlay = overlayRef.current;
+    const nav = navRef.current;
+    const bar1 = bar1Ref.current;
+    const bar2 = bar2Ref.current;
+
+    // Hide menu content first
+    gsap.to(nav, {
+      opacity: 0,
+      x: 50,
+      duration: 0.25,
+      ease: 'power2.in',
+    });
+
+    // Close circular overlay
+    gsap.to(overlay, {
+      clipPath: 'circle(0% at calc(100% - 4rem) 4rem)',
+      duration: 0.7,
+      delay: 0.05,
+      ease: 'power4.inOut',
+      onComplete: () => {
+        gsap.set(overlay, {
+          pointerEvents: 'none',
+        });
+      },
+    });
+
+    // X → Hamburger
+    gsap.to(bar1, {
+      y: 0,
+      rotate: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+
+    gsap.to(bar2, {
+      y: 0,
+      rotate: 0,
+      width: '42px',
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+
+  };
+
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      setIsMenuOpen(true);
+      openMenuAnimation();
+    } else {
+      setIsMenuOpen(false);
+      closeMenuAnimation();
+    }
   };
 
   const closeMenu = () => {
+    if (!isMenuOpen) return;
+
     setIsMenuOpen(false);
+    closeMenuAnimation();
   };
 
   return (
-    <header className={`header-container ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="header-content">
-        {/* Logo Section */}
-        <a href="/" className="header-logo-link" aria-label="GR Reddy Eye Hospital Home">
-          <img src={logo1} alt="GR Reddy Eye Hospital Logo" className="header-logo-img" />
-          <div className="header-logo-text">
-            <span className="logo-title">GR REDDY</span>
-            <span className="logo-subtitle">EYE HOSPITAL</span>
-          </div>
-        </a>
+    <>
+      {/* HEADER */}
+      <header
+        className={`header-container ${
+          isScrolled ? 'scrolled' : ''
+        } ${isMenuOpen ? 'menu-open' : ''}`}
+      >
+        <div className="header-content">
 
-        {/* Hamburger Menu Toggle Button matching exact visual spec */}
-        <button 
-          className={`menu-toggle-btn ${isMenuOpen ? 'active' : ''}`} 
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
+          {/* LOGO */}
+          <Link
+            to="/"
+            className="header-logo-link"
+            aria-label="GR Reddy Eye Hospital Home"
+          >
+            <img
+              src={logo1}
+              alt="GR Reddy Eye Hospital Logo"
+              className="header-logo-img"
+            />
+
+            <div className="header-logo-text">
+              <span className="logo-title">GR REDDY</span>
+              <span className="logo-subtitle">EYE HOSPITAL</span>
+            </div>
+          </Link>
+
+          {/* MENU BUTTON */}
+          <button
+            className={`menu-toggle-btn ${
+              isMenuOpen ? 'active' : ''
+            }`}
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+          >
+            <span
+              ref={bar1Ref}
+              className="menu-line menu-line-1"
+            />
+
+            <span
+              ref={bar2Ref}
+              className="menu-line menu-line-2"
+            />
+
+           
+          </button>
+        </div>
+      </header>
+
+      {/* FULLSCREEN MENU */}
+      <div
+        ref={overlayRef}
+        className="menu-overlay"
+      >
+        <nav
+          ref={navRef}
+          className="fullscreen-nav"
         >
-          {isMenuOpen ? (
-            /* Close 'X' SVG Icon */
-            <svg className="menu-icon close-icon" width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 6L22 18" stroke="#0f3443" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M6 18L22 6" stroke="#0f3443" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          ) : (
-            /* Staggered 3-line Hamburger SVG Icon matching user screenshot */
-            <svg className="menu-icon hamburger-icon" width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="2" y1="4" x2="30" y2="4" stroke="#0f3443" strokeWidth="3" strokeLinecap="round" />
-              <line x1="8" y1="12" x2="30" y2="12" stroke="#0f3443" strokeWidth="3" strokeLinecap="round" />
-              <line x1="16" y1="20" x2="30" y2="20" stroke="#0f3443" strokeWidth="3" strokeLinecap="round" />
-            </svg>
-          )}
-        </button>
-      </div>
+          <Link
+            to="/"
+            className="fullscreen-nav-link"
+            onClick={closeMenu}
+          >
+            Home
+          </Link>
 
-      {/* Slide-down Nav Overlay */}
-      <div className={`nav-menu-overlay ${isMenuOpen ? 'open' : ''}`} onClick={closeMenu}>
-        <nav className="nav-menu" onClick={(e) => e.stopPropagation()}>
-          <ul className="nav-list">
-            <li className="nav-item">
-              <a href="#home" className="nav-link active" onClick={closeMenu}>Home</a>
-            </li>
-            <li className="nav-item">
-              <a href="#about" className="nav-link" onClick={closeMenu}>About Us</a>
-            </li>
-            <li className="nav-item">
-              <a href="#services" className="nav-link" onClick={closeMenu}>Services</a>
-            </li>
-          </ul>
-          
+          <Link
+            to="/about"
+            className="fullscreen-nav-link"
+            onClick={closeMenu}
+          >
+            About Us
+          </Link>
+
+          <Link
+            to="/service"
+            className="fullscreen-nav-link"
+            onClick={closeMenu}
+          >
+            Services
+          </Link>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
 

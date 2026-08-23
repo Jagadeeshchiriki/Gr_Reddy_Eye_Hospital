@@ -1,0 +1,298 @@
+/* =====================================================
+   About Section — GSAP ScrollTrigger pins this section
+   ===================================================== */
+.about-scroll-section {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #F5F1E4;
+  margin-bottom: 60px;
+}
+
+.about-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6% ;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   Left Column
+   ===================================================== */
+.about-text-content {
+  flex: 1;
+  max-width: 980px;
+  z-index: 10;
+  
+}
+
+.about-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(4.7rem, 6.5vw, 7.2rem);
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.15;
+  letter-spacing: 0em;
+  margin: 0;
+}
+
+.about-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(1.3rem, 2vw, 2.2rem);
+  font-weight: 400;
+  color: #333;
+  line-height: 1.65;
+  margin-top: 88px;
+  max-width: 810px;
+}
+
+/* =====================================================
+   Right Column — cards container
+   ===================================================== */
+.about-cards-visual {
+  flex: 1;
+  position: relative;
+  height: 560px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* =====================================================
+   Base Card — GSAP sets initial y/rotation/opacity
+   Sizes match the reference image proportions
+   ===================================================== */
+.about-card {
+  position: absolute;
+  width: 680px;
+  height: 750px;
+  border-radius: 52px;
+  padding: 50px 56px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+/* Card colours & stacking offsets matching reference */
+.card-white {
+  background-color: #FFFFFF;
+  color: #2353A1;
+  z-index: 1;
+  top: 0;
+  right: 0;
+}
+
+.card-yellow {
+  background-color: #FFE599;
+  color: #000000;
+  z-index: 2;
+  top: 30px;
+  right: 0;
+}
+
+.card-blue {
+  background-color: #2353A1;
+  color: #FFFFFF;
+  z-index: 3;
+  top: 60px;
+  right: 0;
+}
+
+/* =====================================================
+   Icon Badge — top right corner
+   ===================================================== */
+.icon-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.icon-dark  { background-color: #0F172A; border: none; }
+.icon-blue  { background-color: #2353A1; border: none; }
+.icon-white { background-color: #FFFFFF; }
+
+/* =====================================================
+   Card Body — stat near top, description pushed to bottom
+   ===================================================== */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card-stat {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12.5rem;
+  font-weight: 500;
+  line-height: 0.9;
+  margin: 0 0 16px;
+  letter-spacing: -0.03em;
+}
+
+.card-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.95rem;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.card-desc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.95em;
+  line-height: 1.55;
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* =====================================================
+   Responsive
+   ===================================================== */
+
+/* Large desktop — slight scale down to keep cards on screen */
+@media (max-width: 1600px) {
+  .about-cards-visual { height: 720px; }
+
+  .about-card {
+    width: 580px;
+    height: 680px;
+    padding: 46px 50px;
+  }
+
+  .card-stat  { font-size: 10.5rem; }
+  .card-label { font-size: 1.7rem; }
+  .card-desc  { font-size: 1.7rem; }
+}
+
+@media (max-width: 1280px) {
+  .about-inner { padding: 0 5%; }
+
+  .about-cards-visual { height: 640px; }
+
+  .about-card {
+    width: 500px;
+    height: 600px;
+    padding: 40px 44px;
+    border-radius: 44px;
+  }
+
+  .card-stat  { font-size: 9rem; }
+  .card-label { font-size: 1.5rem; }
+  .card-desc  { font-size: 1.5rem; }
+}
+
+/* Tablet & below — column layout, cards centered, full-width */
+@media (max-width: 1025px) {
+  .about-inner {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 5% 40px;
+    text-align: center;
+    gap: 48px;
+  }
+
+  .about-text-content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-subtitle {
+    margin-top: 40px;
+    max-width: 90%;
+  }
+
+  /* Cards visual: full width, tall enough to show stacked cards */
+  .about-cards-visual {
+    width: 100%;
+    height: 700px;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Cards: 90% of screen width, centered, large */
+  .about-card {
+    width: 90%;
+    max-width: 600px;
+    height: 640px;
+    padding: 48px 44px;
+    border-radius: 48px;
+    /* Override absolute right positioning — center instead */
+    right: auto !important;
+    left: 50%;
+    transform-origin: center center;
+    /* GSAP will override transform, but we set the base position */
+  }
+
+  /* Vertical fan offsets when stacked */
+  .card-white  { top: 0   !important; }
+  .card-yellow { top: 40px !important; }
+  .card-blue   { top: 80px !important; }
+
+  .card-stat  { font-size: 10rem; }
+  .card-label { font-size: 1.8rem; }
+  .card-desc  { font-size: 1.6rem; }
+
+  .icon-circle { width: 80px; height: 80px; }
+}
+
+@media (max-width: 768px) {
+  .about-inner {
+    padding: 50px 4% 32px;
+    gap: 36px;
+  }
+
+  .about-cards-visual { height: 620px; }
+
+  .about-card {
+    width: 92%;
+    max-width: 480px;
+    height: 560px;
+    padding: 40px 36px;
+    border-radius: 40px;
+  }
+
+  .card-stat  { font-size: 8rem; }
+  .card-label { font-size: 1.55rem; }
+  .card-desc  { font-size: 1.4rem; }
+
+  .icon-circle { width: 68px; height: 68px; }
+}
+
+@media (max-width: 480px) {
+  .about-inner {
+    padding: 40px 4% 28px;
+    gap: 28px;
+  }
+
+  .about-cards-visual { height: 540px; }
+
+  .about-card {
+    width: 94%;
+    max-width: 380px;
+    height: 480px;
+    padding: 32px 28px;
+    border-radius: 32px;
+  }
+
+  .card-stat  { font-size: 6.5rem; }
+  .card-label { font-size: 1.3rem; }
+  .card-desc  { font-size: 1.15rem; }
+
+  .icon-circle { width: 56px; height: 56px; }
+}
