@@ -12,6 +12,19 @@ function Header() {
   const navRef = useRef(null);
   const bar1Ref = useRef(null);
   const bar2Ref = useRef(null);
+  const btnRef = useRef(null);
+
+  // Reveal origin, measured from where the toggle button actually is.
+  // Previously this was a hardcoded `calc(100% - 4rem) 4rem`, written
+  // inline by GSAP, which permanently beat the mobile origin in the
+  // stylesheet once the menu had been opened once.
+  const getRevealOrigin = () => {
+    const btn = btnRef.current;
+    if (!btn) return 'calc(100% - 4rem) 4rem';
+
+    const r = btn.getBoundingClientRect();
+    return `${r.left + r.width / 2}px ${r.top + r.height / 2}px`;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +38,15 @@ function Header() {
     };
   }, []);
 
+  // The page used to keep scrolling behind the fullscreen menu on touch.
+  useEffect(() => {
+    document.body.classList.toggle('menu-scroll-lock', isMenuOpen);
+
+    return () => {
+      document.body.classList.remove('menu-scroll-lock');
+    };
+  }, [isMenuOpen]);
+
   const openMenuAnimation = () => {
     const overlay = overlayRef.current;
     const nav = navRef.current;
@@ -37,7 +59,7 @@ function Header() {
     });
 
     gsap.to(overlay, {
-      clipPath: 'circle(150% at calc(100% - 4rem) 4rem)',
+      clipPath: `circle(150% at ${getRevealOrigin()})`,
       duration: 0.8,
       ease: 'power4.inOut',
     });
@@ -53,7 +75,8 @@ function Header() {
     gsap.to(bar2, {
       y: -5,
       rotate: -45,
-      width: '62px',
+      // Match bar 1 so the two form an even X at every breakpoint
+      width: () => (bar1 ? bar1.offsetWidth : 62),
       duration: 0.4,
       ease: 'power2.out',
     });
@@ -91,7 +114,7 @@ function Header() {
 
     // Close circular overlay
     gsap.to(overlay, {
-      clipPath: 'circle(0% at calc(100% - 4rem) 4rem)',
+      clipPath: `circle(0% at ${getRevealOrigin()})`,
       duration: 0.7,
       delay: 0.05,
       ease: 'power4.inOut',
@@ -113,9 +136,13 @@ function Header() {
     gsap.to(bar2, {
       y: 0,
       rotate: 0,
-      width: '42px',
       duration: 0.4,
       ease: 'power2.out',
+      // Hand the width back to the stylesheet rather than a hardcoded px
+      // value, so each breakpoint keeps its own bar width.
+      onComplete: () => {
+        gsap.set(bar2, { clearProps: 'width' });
+      },
     });
 
   };
@@ -167,6 +194,7 @@ function Header() {
 
           {/* MENU BUTTON */}
           <button
+            ref={btnRef}
             className={`menu-toggle-btn ${
               isMenuOpen ? 'active' : ''
             }`}

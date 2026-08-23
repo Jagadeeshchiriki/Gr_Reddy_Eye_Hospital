@@ -36,7 +36,7 @@
 }
 
 .footer-brand-title {
-  font-size: clamp(5.2rem, 12.5vw, 16.2rem);
+  font-size: clamp(3.4rem, 9.4vw, 11.3rem);
   font-weight: 600;
   color: #FEE89D;
   margin: 0;
@@ -46,7 +46,7 @@
 }
 
 .footer-brand-subtitle {
-  font-size: clamp(1.6rem, 6.2vw, 5.2rem);
+  font-size: clamp(1.4rem, 4.4vw, 3.9rem);
   font-weight: 500;
   color: #ffffff;
   margin: 10px 0 0 0;
@@ -61,7 +61,7 @@
   width: 100%;
   height: 1px;
   background-color: rgba(255, 255, 255, 0.35);
-  margin: 150px 0 60px 0;
+  margin: clamp(48px, 9vw, 150px) 0 clamp(28px, 4vw, 60px) 0;
 }
 
 /* Contact & Social Links Section */
@@ -143,10 +143,12 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.social-icon-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: #ffffff;
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .social-icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+  }
 }
 
 /* Copyright Bar */
@@ -190,19 +192,32 @@
   transform: translateY(0);
 }
 
-.scroll-up-btn:hover {
-  background-color: #FEE89D;
-  border-color: #0f3443;
-  transform: translateY(-3px) scale(1.06);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+@media (hover: hover) and (pointer: fine) {
+  .scroll-up-btn:hover {
+    background-color: #FEE89D;
+    border-color: #0f3443;
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  .scroll-up-btn:hover svg {
+    stroke: #0f3443;
+  }
 }
 
-.scroll-up-btn:hover svg {
-  stroke: #0f3443;
+/* ============================================================
+   Responsive
+   Ladder: 1600 / 1280 / 1024 / 768 / 480
+   ============================================================ */
+
+/* Mid range — the old 100px -> 40px jump left this band cramped */
+@media (max-width: 1440px) {
+  .footer-overlay {
+    padding: 56px 70px 28px 70px;
+  }
 }
 
-/* Responsive Adaptations for Screen Sizes <= 1025px and <= 768px */
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
   .footer-overlay {
     padding: 50px 40px 25px 40px;
     background: linear-gradient(
@@ -224,9 +239,22 @@
   .footer-hero {
     margin-bottom: 0;
   }
+
+  .footer-middle {
+    gap: 40px;
+  }
+
+  .footer-contact-block {
+    margin-bottom: 24px;
+  }
 }
 
 @media (max-width: 768px) {
+  .footer-container {
+    /* `right center` crops the artwork hard in portrait */
+    background-position: center center;
+  }
+
   .footer-overlay {
     padding: 36px 20px 20px 20px;
   }
@@ -249,6 +277,11 @@
     gap: 24px;
   }
 
+  .footer-contact-block {
+    margin-bottom: 0;
+    padding: 0;
+  }
+
   .footer-social-block {
     align-self: flex-start;
   }
@@ -263,5 +296,41 @@
     right: 20px;
     width: 44px;
     height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-overlay {
+    padding: 30px 16px 18px 16px;
+  }
+
+  .contact-heading {
+    font-size: 1.3rem;
+  }
+
+  .social-icon-btn {
+    width: 52px;
+    height: 52px;
+  }
+
+  .social-icon-btn svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-copyright {
+    font-size: 0.78rem;
+  }
+}
+
+/* Very narrow phones — "GR Reddy" at the clamp floor still overflows */
+@media (max-width: 360px) {
+  .footer-brand-title {
+    font-size: 1.9rem;
+  }
+
+  .footer-brand-subtitle {
+    font-size: 1.05rem;
+    letter-spacing: 2px;
   }
 }

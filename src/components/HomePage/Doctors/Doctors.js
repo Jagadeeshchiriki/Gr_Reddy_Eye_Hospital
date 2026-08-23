@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./Doctors.css";
 import doctor1 from "../../../assets/images/HomePage/doctor1.jpg";
 import doctor2 from "../../../assets/images/HomePage/doctor2.jpg";
@@ -35,26 +36,29 @@ const Doctors = () => {
     const track   = trackRef.current;
     if (!section || !track) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Desktop only. At <=1024px the track is a vertical column of
+    // full-width cards (see Doctors.css) and nothing is pinned.
+    mm.add(DESKTOP_MQ, () => {
       const cards = gsap.utils.toArray(".doctor-card");
 
       // Ensure track starts at x=0 — no premature movement
       gsap.set(track, { x: 0 });
 
-      // Slide distance = card width + gap between cards
-      const getSlideDistance = () => {
-        const card = cards[0];
-        if (!card) return 0;
-        const gap = parseFloat(getComputedStyle(track).gap) || 32;
-        return card.offsetWidth + gap;
-      };
-
       // ─────────────────────────────────────────────────────────
       // ONLY moves when user scrolls — no snap, no anticipatePin
       // Both of those cause movement before/outside scroll intent
+      //
+      // offsetLeft of the last card IS the exact translate that lands
+      // it flush at the left edge, whatever the card width or gap —
+      // no width + gap arithmetic to overshoot on narrow viewports.
       // ─────────────────────────────────────────────────────────
       gsap.to(track, {
-        x: () => -getSlideDistance() * (cards.length - 1),
+        x: () => {
+          const last = cards[cards.length - 1];
+          return last ? -last.offsetLeft : 0;
+        },
         ease: "none",
         scrollTrigger: {
           trigger: section,
@@ -65,10 +69,9 @@ const Doctors = () => {
           invalidateOnRefresh: true,
         },
       });
+    });
 
-    }, section);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (

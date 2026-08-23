@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./Achievements.css";
 import awward1 from "../../../assets/images/HomePage/awward1.png";
 import awward2 from "../../../assets/images/HomePage/awward2.png";
@@ -56,7 +57,11 @@ const Achievements = () => {
   const cardsRef    = useRef([]);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Desktop only. The +/-120vw entrance is the biggest source of
+    // jank on phones, so at <=1024px the cards simply render in place.
+    mm.add(DESKTOP_MQ, () => {
 
       // ── Heading slides up on enter ──
       gsap.set(headingRef.current, { opacity: 0, y: 50 });
@@ -98,9 +103,9 @@ const Achievements = () => {
         });
       });
 
-    }, sectionRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (

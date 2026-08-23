@@ -19,6 +19,13 @@ html, body {
   box-sizing: inherit;
 }
 
+/* Global overflow guard — stops any oversized media forcing a horizontal
+   scrollbar. Note: the root font size is deliberately left at the browser
+   default; every rem in this project is calibrated against 16px. */
+img, svg, video {
+  max-width: 100%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
