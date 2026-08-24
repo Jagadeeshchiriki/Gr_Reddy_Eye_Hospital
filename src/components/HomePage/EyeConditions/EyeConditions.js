@@ -3,6 +3,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./EyeConditions.css";
+import cataractcondtion from "../../../assets/images/HomePage/cataractcondition.png";
+import glaucomacondition from "../../../assets/images/HomePage/glaucomacondition.png";
+import retinacondition from "../../../assets/images/HomePage/retinacondition.png";
+import dryeyecondition from "../../../assets/images/HomePage/dryeyecondition.png";
+import astigmatismcondition from "../../../assets/images/HomePage/astigmatismcondition.png";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,34 +20,34 @@ const EyeConditions = () => {
     {
       name: "Cataract",
       image:
-        "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1800&q=90",
+        cataractcondtion,
       bg: "#28559c",
       color: "#fff",
     },
     {
       name: "Astigmatism",
-      image:
+      image:astigmatismcondition||
         "https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=1800&q=90",
       bg: "#fee5a7",
       color: "#000",
     },
     {
       name: "Glaucoma",
-      image:
+      image:glaucomacondition||
         "https://images.unsplash.com/photo-1588776814546-daab30f310ce?auto=format&fit=crop&w=1800&q=90",
       bg: "#fff",
       color: "#28559c",
     },
     {
       name: "Dry Eye",
-      image:
+      image: dryeyecondition||
         "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1800&q=90",
       bg: "#28559c",
       color: "#fff",
     },
     {
       name: "Retina",
-      image:
+      image: retinacondition||
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1800&q=90",
       bg: "#eadfd5",
       color: "#111",
