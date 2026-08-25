@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import { motion } from "motion/react";
 import "./Ourstory.css";
 
@@ -25,71 +25,17 @@ const sections = [
       { title: "Patient First", text: "Clear guidance, personal attention, and dedicated support" },
     ],
   },
-  {
-    id: "advanced-technology",
-    title: "Advanced technology. Better vision.",
-    description:
-      "We combine decades of ophthalmic expertise with modern equipment and proven treatment methods to provide safe, precise, and personalized eye care.",
-    bullets: [
-      { title: "Specialized Treatments", text: "Expert care across a wide range of eye conditions" },
-      { title: "Precision Diagnosis", text: "Advanced tools for accurate eye examinations" },
-      { title: "Continuous Excellence", text: "Modern practices guided by experience and innovation" },
-    ],
-  },
+  
 ];
 
 export function OurStory() {
-  const sectionRef   = useRef(null); // the whole .our-story wrapper
-  const sidebarRef   = useRef(null); // the inner sidebar content
-  const [sidebarStyle, setSidebarStyle] = useState({});
-
-  useEffect(() => {
-    const HEADER_HEIGHT = 100; // px — clear the fixed header
-
-    function onScroll() {
-      const section  = sectionRef.current;
-      const sidebar  = sidebarRef.current;
-      if (!section || !sidebar) return;
-
-      const sectionRect  = section.getBoundingClientRect();
-      const sidebarHeight = sidebar.offsetHeight;
-      const sectionHeight = section.offsetHeight;
-
-      // How far the top of the section is from the viewport top
-      const sectionTop = sectionRect.top;
-
-      if (sectionTop > HEADER_HEIGHT) {
-        // Section hasn't reached sticky point yet — normal flow
-        setSidebarStyle({ position: "relative", top: "auto" });
-      } else if (sectionTop <= HEADER_HEIGHT && sectionRect.bottom > sidebarHeight + HEADER_HEIGHT) {
-        // Section is in range — fix the sidebar
-        setSidebarStyle({
-          position: "fixed",
-          top: `${HEADER_HEIGHT}px`,
-          width: sidebarRef.current?.parentElement?.offsetWidth + "px",
-        });
-      } else {
-        // Section is ending — release the sidebar so it scrolls naturally
-        setSidebarStyle({
-          position: "absolute",
-          top: `${sectionHeight - sidebarHeight-200}px`,
-        });
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // run once on mount
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <div className="our-story" ref={sectionRef}>
+    <div className="our-story">
       <div className="our-story-container">
 
-        {/* ── Left Sidebar ── */}
+        {/* ── Left Sidebar (Sticky) ── */}
         <div className="our-story-sidebar">
-          {/* This inner div gets the dynamic position style */}
-          <div className="our-story-sticky" ref={sidebarRef} style={sidebarStyle}>
+          <div className="our-story-sticky">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -112,10 +58,9 @@ export function OurStory() {
               key={section.id}
               initial={{ opacity: 0, y: 48 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-20% 0px -20% 0px" }}
               transition={{
                 duration: 0.85,
-                delay: index === 0 ? 0.25 : 0,
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="our-story-section"

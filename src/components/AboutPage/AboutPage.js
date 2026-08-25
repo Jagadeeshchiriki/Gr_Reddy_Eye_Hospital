@@ -3,6 +3,8 @@ import Header from "../HeaderComponent/header";
 import Footer from "../FooterComponent/footer";
 import Herocomponent from "./Herocomponent/Herocomponent";
 import OurStory from "./Ourstory/Ourstory";
+import DoctorsLegacy from "./DoctorsLegacy/DoctorsLegacy";
+import BooksAwards from "./BooksAwards/BooksAwards";
 import "./AboutPage.css";
 
 const AboutPage = () => {
@@ -12,6 +14,8 @@ const AboutPage = () => {
             <main className="main-content">
                <Herocomponent/>
                <OurStory/>
+               <DoctorsLegacy/>
+               <BooksAwards/>
             </main>
             <Footer />
         </div>

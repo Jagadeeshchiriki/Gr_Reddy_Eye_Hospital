@@ -15,7 +15,12 @@
 
   transition:
     background-color 0.4s ease,
-    margin-top 0.4s ease;
+    margin-top 0.4s ease,
+    transform 0.4s ease;
+}
+
+.header-container.header-hidden {
+  transform: translateY(-150px);
 }
 
 .header-content {

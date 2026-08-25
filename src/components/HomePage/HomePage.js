@@ -29,6 +29,19 @@ function HomePage() {
       cancelAnimationFrame(inner);
     };
   }, []);
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+
+    return () => {
+      window.history.scrollRestoration = "auto";
+    };
+  }, []);
 
   return (
     <div className="HomePage">

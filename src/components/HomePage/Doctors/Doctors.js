@@ -14,16 +14,15 @@ const doctors = [
     role: "Senior Consultant Ophthalmologist",
     image: doctor1,
     description:
-      "Delivering Trusted, Compassionate, and advanced eye care for over four decades while shaping the future of ophthalmology through education, research, and clinical excellence.",
-    num: "01",
+      "One of the most respected names in ophthalmology with over 40 years of clinical experience and a legacy of academic trust excellence."
   },
   {
     name: "Dr. Sandeep Reddy",
     role: "Senior Cataract & Retina Specialist",
     image: doctor2,
     description:
-      "Delivering Trusted, Compassionate, and advanced eye care with a focus on cataract and retinal surgery, combining clinical expertise with compassionate patient care.",
-    num: "02",
+      "A specialist in both Cataract and Retina Surgery, a rare combination of expertise enabling the management of complex eye conditions.",
+  
   },
 ];
 
@@ -105,7 +104,6 @@ const Doctors = () => {
                     <p className="doctor-role">{doc.role}</p>
                   </div>
                   <p className="doctor-desc">{doc.description}</p>
-                  <span className="doctor-num">{doc.num}</span>
                 </div>
 
               </article>

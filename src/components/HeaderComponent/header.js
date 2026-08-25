@@ -7,6 +7,8 @@ import './header.css';
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   const overlayRef = useRef(null);
   const navRef = useRef(null);
@@ -28,7 +30,17 @@ function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsHidden(true);
+      } else if (currentScrollY < lastScrollY.current) {
+        setIsHidden(false);
+      }
+      
+      setIsScrolled(currentScrollY > 10);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -170,7 +182,7 @@ function Header() {
       <header
         className={`header-container ${
           isScrolled ? 'scrolled' : ''
-        } ${isMenuOpen ? 'menu-open' : ''}`}
+        } ${isMenuOpen ? 'menu-open' : ''} ${isHidden && !isMenuOpen ? 'header-hidden' : ''}`}
       >
         <div className="header-content">
 

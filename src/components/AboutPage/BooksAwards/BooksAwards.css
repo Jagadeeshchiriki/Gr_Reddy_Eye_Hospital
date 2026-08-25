@@ -1,0 +1,134 @@
+.books-awards-section {
+  background: #f3efe6;
+  padding: 120px 24px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+.books-header {
+  margin-bottom: 120px;
+}
+
+.books-header h2 {
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.books-header p {
+  font-size: 1.125rem;
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.books-perspective-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  perspective: 1400px;
+  padding: 40px 0;
+}
+
+.books-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  transform-style: preserve-3d;
+}
+
+.book-card {
+  width: 200px;
+  height: 280px;
+  border-radius: 12px;
+  background-color: #d9d9d9;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  position: relative;
+  will-change: transform;
+}
+
+.book-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 3D Arc Positioning */
+.book-card.far-left {
+  transform: rotateY(25deg) scale(1.2) translateX(32px);
+  z-index: 1;
+}
+
+.book-card.mid-left {
+  transform: rotateY(15deg) scale(1.1) translateX(32px);
+  z-index: 2;
+}
+
+.book-card.center {
+  transform: rotateY(0deg) scale(.96) translateZ(26px);
+  z-index: 3;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.book-card.mid-right {
+  transform: rotateY(-15deg) scale(1.08) translateX(-32px);
+  z-index: 2;
+}
+
+.book-card.far-right {
+  transform: rotateY(-25deg) scale(1.2) translateX(-26px);
+  z-index: 1;
+}
+
+/* Hover Effects */
+.books-gallery:hover .book-card {
+  /* Slightly dim non-hovered items if desired, or just let them stay */
+}
+
+.book-card:hover {
+  transform: rotateY(0deg) scale(1.15) translateZ(80px) !important;
+  z-index: 10 !important;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2) !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .books-header h2 {
+    font-size: 3.5rem;
+  }
+  .books-gallery {
+    gap: 10px;
+  }
+  .book-card {
+    width: 160px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .books-header h2 {
+    font-size: 2.5rem;
+  }
+  .books-gallery {
+    flex-wrap: wrap;
+    perspective: none;
+    transform-style: flat;
+  }
+  .book-card {
+    width: 140px;
+    height: 200px;
+    transform: none !important;
+  }
+  .book-card:hover {
+    transform: scale(1.05) !important;
+  }
+}

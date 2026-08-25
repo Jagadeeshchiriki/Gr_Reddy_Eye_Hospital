@@ -66,7 +66,7 @@
 .ec-intro-title {
   margin: 0;
 
-  font-size:clamp(3rem, 6vw, 6rem);
+  font-size:clamp(3rem, 6vw, 3rem);
 
   line-height: 1.23;
 
@@ -208,7 +208,7 @@
 .ec-intro-title {
   /* The 20vh cap only binds on short desktop viewports (below ~760px tall),
      where this title would otherwise outgrow the 100vh pinned section. */
-  font-size: min(clamp(2.1rem, 6.5vw, 7.2rem), 20vh);
+  font-size: min(clamp(3rem, 6vw, 6rem), 20vh);
 }
 
 
@@ -221,6 +221,12 @@
    <=1024px : the track becomes a vertical column, every card
               is already expanded, nothing animates.
 ========================================================= */
+@media (max-width:1600px){
+  .ec-intro-title {
+font-size: clamp(3rem, 5vw, 5rem);
+
+  }
+}
 
 /* Short desktop viewports — keep the image and title inside 100vh */
 @media (min-width: 1025px) and (max-height: 760px) {
@@ -263,6 +269,7 @@
     width: 100%;
     height: auto;
     padding: 0 6vw 44px;
+    justify-content: center;
   }
 
   /* Cards are full width and already expanded */
