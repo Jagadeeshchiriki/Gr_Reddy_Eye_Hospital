@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React from "react";
 import Header from "../HeaderComponent/header";
 import Footer from "../FooterComponent/footer";
 import "./ServicesPage.css";
