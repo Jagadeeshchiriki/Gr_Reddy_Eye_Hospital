@@ -4,7 +4,6 @@
 
 .our-story {
   min-height: 100vh;
-  background: #f3efe6;
   color: #111111;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   padding-bottom: 128px;
@@ -196,10 +195,12 @@
 }
 
 
+
+
 /* =========================================
-   Tablet / Desktop  (≥ 768px)
-   Two-column layout, sticky kicks in
+   Large Desktop  (≥ 1024px)
    ========================================= */
+
 
 @media (min-width: 768px) {
   .our-story-container {
@@ -285,12 +286,53 @@
 }
 
 
+
+@media (max-width: 1024px) {
+  .our-story{
+    padding-bottom: 24px;
+  }
+  .our-story-container {
+    padding-left: 76px;
+    padding-right: 76px;
+    gap: 56px;
+  }
+
+  .our-story-sidebar {
+    width: 45%;
+  }
+
+  .our-story-heading {
+    font-size: 64px;
+  }
+
+  .our-story-content{
+    gap: 42px;
+  }
+
+  .our-story-tagline {
+    font-size: 32px;
+  }
+
+  .our-story-section-title {
+    font-size: 32px;
+  }
+
+  .our-story-description {
+    font-size: 1.15rem;
+  }
+
+  .our-story-bullet {
+    font-size: 1.15rem
+  }
+}
+
+
 /* =========================================
    Mobile  (≤ 767px)
    Single column, sticky disabled
    ========================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .our-story {
     padding-bottom: 80px;
   }
@@ -305,7 +347,7 @@
   }
 
   .our-story-heading {
-    font-size: 52px;
+    font-size: 48px;
   }
 
   .our-story-tagline {
@@ -324,3 +366,37 @@
     font-size: 18px;
   }
 }
+
+@media (max-width: 499px) {
+  .our-story{
+    padding-bottom: 24px;
+  }
+  .our-story-sidebar{
+    width: 100%;
+  }
+
+  .our-story-heading {
+    font-size: 48px;
+  }
+
+  .our-story-content{
+    gap: 42px;
+  }
+
+  .our-story-tagline {
+    font-size: 28px;
+  }
+
+  .our-story-section-title {
+    font-size: 32px;
+  }
+
+  .our-story-description {
+    font-size: 1.15rem;
+  }
+
+  .our-story-bullet {
+    font-size: 1.15rem
+  }
+}
+

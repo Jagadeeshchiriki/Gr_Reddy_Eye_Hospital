@@ -1,13 +1,10 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { DESKTOP_MQ } from '../../../utils/breakpoints';
 import './aboutcomponent.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Stops mobile browser URL-bar collapse (which changes innerHeight) from
-// firing a ScrollTrigger refresh mid-scroll.
 ScrollTrigger.config({ ignoreMobileResize: true });
 
 function AboutComponent() {
@@ -15,20 +12,15 @@ function AboutComponent() {
   const cardsRef = useRef([]);
 
   useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-
-    // Desktop only. Below 1025px the cards sit in normal vertical flow (see
-    // the max-width: 1024px block in aboutcomponent.css) and nothing animates.
-    // matchMedia reverts every gsap.set below when the query stops matching.
-    mm.add(DESKTOP_MQ, () => {
+    const ctx = gsap.context(() => {
       const cards = cardsRef.current;
 
-      // Set all cards to start position: below + rotated + invisible
+      // Set initial positions
       gsap.set(cards[0], { y: 500, rotation: 8, opacity: 0 });
       gsap.set(cards[1], { y: 500, rotation: 8, opacity: 0 });
       gsap.set(cards[2], { y: 500, rotation: 8, opacity: 0 });
 
-      // Build the scroll-pinned timeline
+      // Build scroll-pinned timeline for all device sizes
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -41,7 +33,6 @@ function AboutComponent() {
         },
       });
 
-      // Card 1 (White — 50K) enters first
       tl.to(cards[0], {
         y: 0,
         rotation: 0,
@@ -50,7 +41,6 @@ function AboutComponent() {
         ease: 'power3.out',
       });
 
-      // Card 2 (Yellow — 90%) enters second
       tl.to(
         cards[1],
         {
@@ -63,7 +53,6 @@ function AboutComponent() {
         '+=0.5'
       );
 
-      // Card 3 (Blue — 40+) enters last
       tl.to(
         cards[2],
         {
@@ -75,16 +64,14 @@ function AboutComponent() {
         },
         '+=0.5'
       );
-    });
+    }, sectionRef);
 
-    return () => mm.revert();
+    return () => ctx.revert();
   }, []);
-
 
   return (
     <section className="about-scroll-section" ref={sectionRef}>
       <div className="about-inner">
-
         {/* Left Column: Stationary Text */}
         <div className="about-text-content">
           <h2 className="about-title">
@@ -100,8 +87,6 @@ function AboutComponent() {
 
         {/* Right Column: Stacked Cards */}
         <div className="about-cards-visual">
-
-          {/* Card 1: White — 50K Successful Treatments */}
           <div
             className="about-card card-white"
             ref={(el) => { cardsRef.current[0] = el; }}
@@ -121,7 +106,6 @@ function AboutComponent() {
             </div>
           </div>
 
-          {/* Card 2: Yellow — 90% Patient Satisfaction */}
           <div
             className="about-card card-yellow"
             ref={(el) => { cardsRef.current[1] = el; }}
@@ -140,7 +124,6 @@ function AboutComponent() {
             </div>
           </div>
 
-          {/* Card 3: Blue — 40+ Years of Excellence */}
           <div
             className="about-card card-blue"
             ref={(el) => { cardsRef.current[2] = el; }}
@@ -159,7 +142,6 @@ function AboutComponent() {
               <p className="card-desc">Over four decades of experience in providing quality medical services.</p>
             </div>
           </div>
-
         </div>
       </div>
     </section>

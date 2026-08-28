@@ -85,7 +85,7 @@ const EyeConditions = () => {
       // ---------------------------------------------
 
       const SMALL_IMAGE_HEIGHT = () => vh() * 0.20;
-      const MAX_IMAGE_HEIGHT = () => vh() * 0.65;
+      const MAX_IMAGE_HEIGHT = () => vh() * 0.70;
 
       // ---------------------------------------------
       // INITIAL STATE

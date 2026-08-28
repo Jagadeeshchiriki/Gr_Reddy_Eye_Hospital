@@ -5,6 +5,7 @@ import Herocomponent from "./Herocomponent/Herocomponent";
 import OurStory from "./Ourstory/Ourstory";
 import DoctorsLegacy from "./DoctorsLegacy/DoctorsLegacy";
 import BooksAwards from "./BooksAwards/BooksAwards";
+import Facilities from "./Facilities/Facilities";
 import "./AboutPage.css";
 
 const AboutPage = () => {
@@ -16,6 +17,7 @@ const AboutPage = () => {
                <OurStory/>
                <DoctorsLegacy/>
                <BooksAwards/>
+               <Facilities/>
             </main>
             <Footer />
         </div>

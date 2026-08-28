@@ -2,18 +2,18 @@ import React from "react";
 import "./BooksAwards.css";
 
 // Images
-import book1 from "../../../assets/images/HomePage/awward1.png";
-import book2 from "../../../assets/images/HomePage/awward2.png";
-import book3 from "../../../assets/images/HomePage/awward3.png";
-import book4 from "../../../assets/images/HomePage/awward4.png";
-import book5 from "../../../assets/images/HomePage/awward5.png";
+import book1 from "../../../assets/images/AboutUsPage/book31.png";
+import book2 from "../../../assets/images/AboutUsPage/book12.png";
+import book3 from "../../../assets/images/AboutUsPage/book21.png";
+import book4 from "../../../assets/images/AboutUsPage/book12.png";
+import book5 from "../../../assets/images/AboutUsPage/book31.png";
 
 const books = [
-  { id: 1, image: book1 },
-  { id: 2, image: book2 },
-  { id: 3, image: book3 },
-  { id: 4, image: book4 },
-  { id: 5, image: book5 },
+  { id: 1, image: book1, bgColor: "rgb(48, 85, 150)" },
+  { id: 2, image: book2, bgColor: "#f0cb64ff" },
+  { id: 3, image: book3, bgColor: "#ffffffff" },
+  { id: 4, image: book4, bgColor: "#f0d664ff" },
+  { id: 5, image: book5, bgColor: "rgb(48, 85, 150)" },
 ];
 
 const BooksAwards = () => {
@@ -37,8 +37,14 @@ const BooksAwards = () => {
             else if (index === 4) positionClass = "far-right";
 
             return (
-              <div key={book.id} className={`book-card ${positionClass}`}>
-                <img src={book.image} alt={`Award ${book.id}`} />
+              <div 
+                key={book.id} 
+                className={`book-card ${positionClass}`}
+                style={{ backgroundColor: book.bgColor }}
+              >
+                <div className="book-image-wrapper">
+                  <img src={book.image} alt={`Award ${book.id}`} />
+                </div>
               </div>
             );
           })}

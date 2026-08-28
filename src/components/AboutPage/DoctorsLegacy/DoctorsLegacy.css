@@ -1,6 +1,5 @@
 .doctors-legacy-section {
-  background: #f3efe6;
-  padding: 100px 24px;
+  padding: 60px 24px;
   font-family: 'Inter', -apple-system, sans-serif;
   overflow: hidden;
 }
@@ -20,16 +19,7 @@
   
 }
 
-@media (min-width: 1024px) {
-  .doctors-legacy-section{
-    padding: 40px 100px;
-  }
-  .doctor-profile {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 40px;
-  }
-}
+
 
 /* --- Left Sticky Column --- */
 .doctor-left {
@@ -45,14 +35,6 @@
   
 }
 
-@media (min-width: 1024px) {
- 
-  .doctor-left {
-    position: sticky;
-    top: 120px;
-    width: 40%;
-  }
-}
 
 .doctor-image-container {
   position: relative;
@@ -107,11 +89,7 @@
   gap: 40px;
 }
 
-@media (min-width: 1024px) {
-  .doctor-right {
-    width: 50%;
-  }
-}
+
 
 .doctor-main-title {
   font-size: 3.5rem;
@@ -179,14 +157,33 @@
 }
 
 
+@media (min-width: 1000px) {
+  .doctors-legacy-section{
+    padding: 40px 80px;
+  }
+  .doctor-profile {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .doctor-right {
+    width: 50%;
+  }
+  .doctor-left {
+    position: sticky;
+    top: 120px;
+    width: 40%;
+  }
+}
+
 
 /* Responsive */
-@media (max-width: 1024px) {
+/* @media (max-width: 1023px) {
   .doctor-subtitle {
     font-size: 2.8rem;
   }
 
-}
+} */
 
 @media (max-width: 768px) {
   .doctors-container {
@@ -198,6 +195,9 @@
   .doctor-profile {
     gap: 48px;
     align-items: center;
+  }
+  .doctor-main-title{
+    font-size: 2.5rem;
   }
   .doctor-subtitle {
     font-size: 2.2rem;

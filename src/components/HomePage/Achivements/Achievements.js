@@ -7,7 +7,7 @@ import awward1 from "../../../assets/images/HomePage/awward1.png";
 import awward2 from "../../../assets/images/HomePage/awward2.png";
 import awward3 from "../../../assets/images/HomePage/awward3.png";
 import awward4 from "../../../assets/images/HomePage/awward4.png";
-import awward5 from "../../../assets/images/HomePage/awward5.png";
+import awward5 from "../../../assets/images/HomePage/awward51.jpeg";
 import awward6 from "../../../assets/images/HomePage/awward6.png";
 
 gsap.registerPlugin(ScrollTrigger);

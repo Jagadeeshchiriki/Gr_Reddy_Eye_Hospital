@@ -112,11 +112,7 @@
     font-size: 4rem;
   }
   .service-card {
-    position: relative !important;
-    top: auto !important;
-    height: auto;
     padding: 20px 0;
-    box-shadow: none;
   }
   .service-card-inner {
     padding: 0 20px;
@@ -143,6 +139,10 @@
   }
   .service-card {
     padding: 60px 0;
+    position: relative !important;
+    top: auto !important;
+    height: auto;
+    box-shadow: none;
   }
   .service-card-inner {
     flex-direction: column;

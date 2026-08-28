@@ -85,7 +85,7 @@ function Footer() {
             {/* Social Media Links */}
             <div className="footer-social-block">
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/grreddyeye_hospital/?hl=en" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="social-icon-btn" 
@@ -99,7 +99,7 @@ function Footer() {
               </a>
 
               <a 
-                href="https://youtube.com" 
+                href="https://www.youtube.com/@drgrreddyeyehospital9390" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="social-icon-btn" 

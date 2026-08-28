@@ -1,0 +1,187 @@
+.facilities-section {
+  position: relative;
+  width: 100%;
+  background: #0b262a;
+}
+
+.facilities-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.facilities-heading {
+  position: absolute;
+  left: 80px;
+  top: 60px;
+  z-index: 100;
+  color: white;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+}
+
+.facility-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.facility-image-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  will-change: width, height, top, left, opacity, transform;
+}
+
+.facility-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+}
+
+.facility-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0.12) 45%,
+    rgba(0, 0, 0, 0.65)
+  );
+  pointer-events: none;
+}
+
+.facility-content {
+  position: absolute;
+  left: clamp(20px, 4vw, 60px);
+  right: clamp(20px, 4vw, 60px);
+  bottom: clamp(20px, 5vh, 60px);
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(15px, 4vw, 60px);
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+}
+
+
+
+.facility-text {
+  max-width: 680px;
+}
+
+.facility-text h2 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 72px);
+  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.facility-text p {
+  margin: 12px 0 0;
+  max-width: 480px;
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ==========================================
+   RESPONSIVE CANVAS ADJUSTMENTS
+   ========================================== */
+
+@media (max-width: 767px) {
+  .facilities-stage {
+    height: 55vh;
+    min-height: 400px;
+  }
+
+  .facilities-heading {
+    top: 18px;
+    left: 18px;
+  }
+
+  .facility-content {
+    left: 18px;
+    right: 18px;
+    bottom: 22px;
+  }
+
+  .facility-text h2 {
+    font-size: clamp(24px, 6vw, 34px);
+  }
+
+  .facility-text p {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  .facilities-heading{
+    font-size: clamp(24px, 6vw, 34px);
+  }
+}
+
+@media (max-width: 480px) {
+  .facilities-stage {
+    height: 50vh;
+    min-height: 360px;
+  }
+
+  .facility-content {
+    left: 16px;
+    right: 16px;
+    bottom: 18px;
+  }
+
+  .facility-text h2 {
+    font-size: 26px;
+  }
+
+  .facility-text p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 430px) {
+  .facilities-stage {
+    height: 46vh;
+    min-height: 330px;
+  }
+
+  .facility-content {
+    left: 14px;
+    right: 14px;
+    bottom: 16px;
+  }
+
+  .facility-text h2 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 370px) {
+  .facilities-stage {
+    height: 44vh;
+    min-height: 300px;
+  }
+
+  .facility-text h2 {
+    font-size: 20px;
+  }
+}
