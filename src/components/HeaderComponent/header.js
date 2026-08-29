@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
+import useAppNavigation from '../../hooks/useAppNavigation';
 import logo1 from '../../assets/images/HomePage/Logo1.png';
 import './header.css';
 
 function Header() {
+  const { navigateTo } = useAppNavigation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
@@ -187,10 +188,14 @@ function Header() {
         <div className="header-content">
 
           {/* LOGO */}
-          <Link
-            to="/"
+          <a
+            href="/"
             className="header-logo-link"
             aria-label="GR Reddy Eye Hospital Home"
+            onClick={(e) => {
+              e.preventDefault();
+              navigateTo('/');
+            }}
           >
             <img
               src={logo1}
@@ -202,7 +207,7 @@ function Header() {
               <span className="logo-title">GR REDDY</span>
               <span className="logo-subtitle">EYE HOSPITAL</span>
             </div>
-          </Link>
+          </a>
 
           {/* MENU BUTTON */}
           <button
@@ -238,29 +243,41 @@ function Header() {
           ref={navRef}
           className="fullscreen-nav"
         >
-          <Link
-            to="/"
+          <a
+            href="/"
             className="fullscreen-nav-link"
-            onClick={closeMenu}
+            onClick={(e) => {
+              e.preventDefault();
+              navigateTo('/');
+              closeMenu();
+            }}
           >
             Home
-          </Link>
+          </a>
 
-          <Link
-            to="/about"
+          <a
+            href="/about"
             className="fullscreen-nav-link"
-            onClick={closeMenu}
+            onClick={(e) => {
+              e.preventDefault();
+              navigateTo('/about');
+              closeMenu();
+            }}
           >
             About Us
-          </Link>
+          </a>
 
-          <Link
-            to="/service"
+          <a
+            href="/service"
             className="fullscreen-nav-link"
-            onClick={closeMenu}
+            onClick={(e) => {
+              e.preventDefault();
+              navigateTo('/service');
+              closeMenu();
+            }}
           >
             Services
-          </Link>
+          </a>
         </nav>
       </div>
     </>

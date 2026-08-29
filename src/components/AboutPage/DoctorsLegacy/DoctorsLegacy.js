@@ -120,10 +120,10 @@ const DoctorsLegacy = () => {
             {/* Left Sticky Column */}
             <div className="doctor-left">
               <div className="doctor-image-container">
-                <img src={doctor.image} alt={doctor.name} className="doctor-img" />
+                <img src={doctor.image} alt={doctor.name} className="doctors-img" />
               </div>
               <div className="doctor-left-info">
-                <h2 className="doctor-name">{doctor.name}</h2>
+                <h2 className="doctor-title">{doctor.name}</h2>
                 <p className="doctor-designation1">{doctor.designation1}</p>
                 <p className="doctor-designation2">{doctor.designation2}</p>
               </div>

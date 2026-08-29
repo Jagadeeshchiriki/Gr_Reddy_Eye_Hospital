@@ -6,17 +6,17 @@ import './footer.css';
 function Footer() {
   const [showScrollUp, setShowScrollUp] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setShowScrollUp(true);
-      } else {
-        setShowScrollUp(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 200) {
+  //       setShowScrollUp(true);
+  //     } else {
+  //       setShowScrollUp(false);
+  //     }
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
 
   const handleScrollToTop = () => {
     // Native smooth scrolling fights the Lenis loop and overshoots.
@@ -53,7 +53,7 @@ function Footer() {
                   </span>
                   <div className="contact-text">
                     Kenal Road, Subbaraopeta,<br />
-                    Tadepalligudem
+                    Tadepalligudem , West Godavari, Andhra Pradesh - 534101
                   </div>
                 </li>
 

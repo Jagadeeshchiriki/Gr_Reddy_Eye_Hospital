@@ -5,12 +5,13 @@ import "./ServicesPage.css";
 
 // Import assets
 import imgCataract from "../../assets/images/ServicesPage/Cataractservice.png";
-import imgPhaco from "../../assets/images/ServicesPage/man-bent-her-head-grabbed-him-her-after-exercise 1 (1).png";
-import imgLasik from "../../assets/images/ServicesPage/LASIK.png";
-import imgICL from "../../assets/images/ServicesPage/man-bent-her-head-grabbed-him-her-after-exercise 1 (2).png";
 import imgRetinal from "../../assets/images/ServicesPage/Retinal_injection 1.png";
-import imgBotox from "../../assets/images/ServicesPage/Botox Treatment.png";
-import imgContactLens from "../../assets/images/ServicesPage/Contact Lens Clinic.png";
+import imgGlucoma from "../../assets/images/ServicesPage/gl-50.jpg";
+import imgRefractive from "../../assets/images/ServicesPage/refractive-surgery.jpg";
+import imgComprehensive from "../../assets/images/ServicesPage/comprehensive.jpg";
+import imgCornea from "../../assets/images/ServicesPage/conrnea.jpg";
+import imgPaediatric from "../../assets/images/ServicesPage/paediatric.jpg";
+import imgOcular from "../../assets/images/ServicesPage/ocular_injuries.png";
 
 const servicesData = [
   {
@@ -22,60 +23,60 @@ const servicesData = [
     image: imgCataract,
   },
   {
-    title: "Phacoemulsification",
-    desc1: "Phacoemulsification is the modern, standard method for cataract surgery. It utilizes ultrasound energy to break up and remove the cloudy lens from the eye, allowing for a smaller incision and a faster, more comfortable recovery compared to older techniques.",
-    desc2: "During the procedure, our skilled surgeons use specialized equipment to safely and efficiently remove the cataract and replace it with an intraocular lens (IOL) implant, improving your vision. At GR Reddy Eye Hospital, we perform phacoemulsification cataract surgery with precision and care, utilizing advanced technology to achieve optimal outcomes for our patients.",
-    bgColor: "#f6df84",
-    textColor: "#1a1a1a",
-    image: imgPhaco,
-  },
-  {
-    title: "LASIK",
-    desc1: "LASIK (Laser-Assisted In Situ Keratomileusis) is a popular and effective refractive surgery procedure that can correct nearsightedness, farsightedness, and astigmatism, reducing or eliminating the need for glasses or contact lenses.",
-    desc2: "Our experienced LASIK surgeons use advanced laser technology to precisely reshape the cornea, improving the way light is focused onto the retina. If you're considering LASIK, schedule a consultation with our team to determine if you're a suitable candidate for this life-changing procedure and learn more about the benefits it can offer.",
-    bgColor: "#ffffff",
-    textColor: "#1a1a1a",
-    image: imgLasik,
-  },
-  {
-    title: "Implantable Collamer Lenses (ICLs)",
-    desc1: "Implantable Collamer Lenses (ICLs) are a type of refractive lens implanted in the eye to correct vision problems. Unlike traditional contact lenses, ICLs are surgically positioned inside the eye, providing excellent visual outcomes without the need for daily maintenance.",
-    desc2: "ICLs are a great option for individuals who may not be suitable candidates for LASIK or other laser vision correction procedures. Our experienced ophthalmologists can evaluate your specific needs and recommend whether ICLs are the right choice for you to achieve clear, crisp vision.",
-    bgColor: "#f3efe6",
-    textColor: "#000000ff",
-    image: imgICL,
-  },
-  {
-    title: "Pterygium Surgery",
-    desc1: "Pterygium is a growth of fleshy tissue on the conjunctiva, the clear tissue that covers the white part of the eye. It can cause irritation, redness, and in some cases, affect vision if it grows over the cornea.",
-    desc2: "Pterygium surgery is a procedure to remove the growth and restore the normal appearance and function of the eye. Our surgeons utilize advanced techniques to minimize discomfort and promote faster healing. If you're experiencing symptoms of pterygium, schedule an evaluation with our team to discuss your treatment options.",
-    bgColor: "#305596",
-    textColor: "#ffffff",
-    image: imgCataract, // Reusing image as there are only 7 images in the folder
-  },
-  {
-    title: "Retinal Injection",
-    desc1: "Retinal injections, also known as intravitreal injections, are used to deliver medication directly into the vitreous cavity of the eye. This targeted approach allows for precise treatment of various retinal conditions, such as macular degeneration, diabetic retinopathy, and retinal vein occlusion.",
-    desc2: "Our experienced retina specialists perform retinal injections with the utmost care and precision, utilizing advanced imaging technologies to ensure the medication is delivered accurately to the affected area. If you have been diagnosed with a retinal condition, discuss your treatment options with our team.",
+    title: "Vitreo-Retinal",
+    desc1: "Our Vitreo-Retinal services provide specialized diagnosis and treatment for conditions affecting the retina and vitreous, including retinal detachment, diabetic retinopathy, macular disorders, retinal vascular diseases, and vitreous hemorrhage.",
+    desc2: "Our experienced retina specialists use advanced diagnostic imaging and modern treatment techniques to protect retinal health and preserve vision. We provide comprehensive care ranging from medical management and intravitreal injections to laser treatment and vitreoretinal surgery, depending on each patient's condition.",
     bgColor: "#f6df84",
     textColor: "#1a1a1a",
     image: imgRetinal,
   },
   {
-    title: "Botox Treatment",
-    desc1: "Botox is a popular non-surgical cosmetic treatment that temporarily reduces or eliminates facial fine lines and wrinkles. It works by blocking nerve signals to the muscles, causing them to relax and smooth out the overlying skin.",
-    desc2: "Beyond cosmetic applications, Botox can also be used for therapeutic purposes, such as treating certain eye conditions like blepharospasm (eyelid spasms) and strabismus (crossed eyes). Our experienced ophthalmologists can administer Botox injections safely and effectively. Schedule a consultation to discuss your goals.",
+    title: "Glaucoma Department",
+    desc1: "Glaucoma is a group of eye conditions that can damage the optic nerve, often due to increased pressure inside the eye. It can gradually cause loss of peripheral vision and may progress without noticeable symptoms in its early stages.",
+    desc2: "Our glaucoma specialists provide comprehensive evaluation, diagnosis, and long-term management using advanced tests such as intraocular pressure measurement, optic nerve assessment, visual field analysis, and OCT. Treatment may include eye drops, laser procedures, or surgery depending on the severity of the condition.",
     bgColor: "#ffffff",
     textColor: "#1a1a1a",
-    image: imgBotox,
+    image: imgGlucoma,
   },
   {
-    title: "Contact Lens Clinic",
-    desc1: "Our contact lens clinic offers comprehensive services for individuals interested in wearing contact lenses or those who already wear them and need a specialized fitting.",
-    desc2: "Our experienced optometrists provide thorough eye exams, prescribe the appropriate type of contact lenses for your visual needs, and offer personalized guidance on proper lens care and hygiene. Whether you need daily disposables, toric lenses for astigmatism, or multifocal lenses, our clinic is here to help.",
+    title: "Refractive Surgery",
+    desc1: "Refractive surgery is designed to reduce dependence on glasses or contact lenses by correcting common refractive errors such as myopia, hyperopia, and astigmatism. Procedures such as LASIK and other laser vision correction techniques reshape the cornea to improve the way light is focused onto the retina.",
+    desc2: "Our ophthalmologists evaluate each patient's eyes, vision, corneal health, and individual requirements to determine the most suitable refractive procedure. With advanced technology and careful surgical planning, we aim to provide clear and comfortable vision with a safe recovery.",
     bgColor: "#f3efe6",
     textColor: "#000000ff",
-    image: imgContactLens,
+    image: imgRefractive,
+  },
+  {
+    title: "Comprehensive Ophthalmology",
+    desc1: "Comprehensive ophthalmology provides complete eye care for a wide range of common eye conditions and vision problems. Our ophthalmologists evaluate the overall health of the eyes, including the cornea, lens, retina, optic nerve, and other ocular structures.",
+    desc2: "From routine eye examinations and vision correction to the diagnosis and management of conditions such as infections, dry eye, cataract, glaucoma, and other ocular disorders, we provide personalized care based on each patient's needs. Regular comprehensive eye examinations also help detect eye problems at an early stage.",
+    bgColor: "#305596",
+    textColor: "#ffffff",
+    image: imgComprehensive, // Reusing image as there are only 7 images in the folder
+  },
+  {
+    title: "Cornea & Ocular Microbiology",
+    desc1: "Corneal and ocular surface conditions can affect the clear front surface of the eye and may cause redness, irritation, pain, watering, blurred vision, or sensitivity to light. Our services include evaluation and treatment of corneal infections, ulcers, inflammations, and other ocular surface disorders.",
+    desc2: "With specialized examination and microbiological evaluation when required, our ophthalmologists identify the underlying cause of infection or inflammation and provide appropriate treatment. Early diagnosis and targeted management are important for protecting the cornea and preventing vision-threatening complications.",
+    bgColor: "#f6df84",
+    textColor: "#1a1a1a",
+    image: imgCornea,
+  },
+  {
+    title: "Paediatric Ophthalmology",
+    desc1: "Paediatric Ophthalmology focuses on the diagnosis and treatment of eye and vision problems in infants and children. Common conditions include squint or strabismus, refractive errors, amblyopia (lazy eye), childhood eye infections, and developmental vision problems.",
+    desc2: "Our team provides child-friendly eye examinations and specialized care to detect vision problems at an early age. Services also include ROP screening, evaluation of childhood refractive errors, and NLD probing when required, helping support healthy visual development.",
+    bgColor: "#ffffff",
+    textColor: "#1a1a1a",
+    image: imgPaediatric,
+  },
+  {
+    title: "Ocular Injuries",
+    desc1: "Ocular injuries and emergencies require prompt evaluation to protect the eye and prevent permanent vision loss. Injuries may result from foreign bodies, chemical exposure, blunt or penetrating trauma, corneal damage, bleeding, or other accidents involving the eye.",
+    desc2: "Our emergency eye care team provides rapid assessment and appropriate treatment based on the type and severity of the injury. We manage urgent ocular conditions with careful examination and timely medical or surgical intervention to protect the eye and preserve vision.",
+    bgColor: "#f3efe6",
+    textColor: "#000000ff",
+    image: imgOcular,
   }
 ];
 

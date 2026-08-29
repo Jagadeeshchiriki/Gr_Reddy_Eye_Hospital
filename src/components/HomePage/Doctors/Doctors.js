@@ -1,10 +1,9 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./Doctors.css";
 import doctor1 from "../../../assets/images/HomePage/doctor1.jpg";
-import doctor2 from "../../../assets/images/HomePage/doctor2.jpg";
+import doctor2 from "../../../assets/images/HomePage/doctor21.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,9 +36,8 @@ const Doctors = () => {
 
     const mm = gsap.matchMedia();
 
-    // Desktop only. At <=1024px the track is a vertical column of
-    // full-width cards (see Doctors.css) and nothing is pinned.
-    mm.add(DESKTOP_MQ, () => {
+    // Apply animation to all screen sizes
+    mm.add("(min-width: 0px)", () => {
       const cards = gsap.utils.toArray(".doctor-card");
 
       // Ensure track starts at x=0 — no premature movement

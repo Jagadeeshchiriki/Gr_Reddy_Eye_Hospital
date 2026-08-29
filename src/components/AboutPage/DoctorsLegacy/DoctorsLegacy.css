@@ -46,7 +46,7 @@
 }
 
 
-.doctor-img {
+.doctors-img {
   position: relative;
   z-index: 2;
   width: 90%;
@@ -61,11 +61,12 @@
   gap: 16px;
 }
 
-.doctor-name {
+.doctor-title {
   font-size: 2rem;
   font-weight: 500;
   color: #111;
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .doctor-designation1 {
@@ -116,6 +117,7 @@
 
 .doctor-quote p {
   font-size: 1.25rem;
+  font-style: italic;
   color: #333;
   line-height: 1.6;
   margin: 0;
@@ -178,18 +180,50 @@
 
 
 /* Responsive */
-/* @media (max-width: 1023px) {
-  .doctor-subtitle {
-    font-size: 2.8rem;
+@media (max-width: 1000px) {
+    .doctor-profile {
+    gap: 64px;
+    align-items: center;
+  }
+  
+  .doctor-left{
+    gap: 44px;
+    top:0px;
+    width: 50%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .doctor-right{
+    width: 100%;
+    gap: 16px;
+    
+  }
+  .doctor-container{
+    gap: 60px;
+    padding: 24px 24px;
+  }
+  .doctor-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+   
+  }
+  .doctors-img{
+    height: 100%;
+    width: 100%;
+    margin: 0;
   }
 
-} */
+}
 
 @media (max-width: 768px) {
   .doctors-container {
     gap: 100px;
   }
   .doctor-left{
+    gap: 8px;
     top: 0;
   }
   .doctor-profile {

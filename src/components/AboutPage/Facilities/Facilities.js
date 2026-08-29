@@ -1,10 +1,12 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import facility1 from "../../../assets/images/AboutUsPage/facility1.jpeg";
-import facility2 from "../../../assets/images/AboutUsPage/facility2.jpeg";
-import facility3 from "../../../assets/images/AboutUsPage/facility3.png";
-import facility4 from "../../../assets/images/AboutUsPage/facility4.jpg";
+import facility1 from "../../../assets/images/AboutUsPage/opticalstore.jpg";
+import facility2 from "../../../assets/images/AboutUsPage/machine.jpg";
+import facility3 from "../../../assets/images/AboutUsPage/operatoinT.jpg";
+import facility4 from "../../../assets/images/AboutUsPage/waitingarea.jpg";
+import facility5 from "../../../assets/images/AboutUsPage/parking.jpg";
+
 
 import "./Facilities.css";
 
@@ -14,31 +16,39 @@ const facilities = [
   {
     id: 1,
     image: facility1,
-    title: "Advanced Eye Care",
+    title: "Vision Care & Eyewear",
     description:
-      "Modern facilities designed around precision, technology and exceptional patient care.",
+      "Quality eyewear and vision solutions for clear, comfortable vision.",
   },
   {
     id: 2,
     image: facility2,
-    title: "Modern Consultation",
+    title: "Advanced Diagnostics",
     description:
-      "Thoughtfully designed consultation spaces that bring comfort and expertise together.",
+      "Modern technology for accurate eye diagnosis and evaluation.",
   },
   {
     id: 3,
     image: facility3,
-    title: "Advanced Diagnostics",
+    title: "Modern Operation Theatre",
     description:
-      "Advanced diagnostic technology supporting accurate evaluation and treatment planning.",
+      "Advanced surgical facilities designed for safe and precise eye care.",
   },
   {
     id: 4,
     image: facility4,
-    title: "Patient-Centred Environment",
+    title: "Comfortable Waiting Hall",
     description:
       "A calm, welcoming environment designed around comfort, safety and better care.",
   },
+  {
+    id: 5,
+    image: facility5,
+    title: "Convenient Parking",
+    description:
+      "Easy and accessible parking for patients and visitors.",
+  },
+
 ];
 
 export default function Facilities() {
@@ -58,7 +68,7 @@ export default function Facilities() {
           start: "top top",
           end: () => `+=${window.innerHeight * (totalSlides * 1.5)}`,
           pin: true,
-          scrub: 5,
+          scrub: 2,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
@@ -133,7 +143,6 @@ export default function Facilities() {
               top: "42%",
               left: "42%",
               borderRadius: "8px",
-              boxShadow: "0px 15px 35px rgba(0,0,0,0.5)",
               duration: 1,
               ease: "power2.inOut",
             },

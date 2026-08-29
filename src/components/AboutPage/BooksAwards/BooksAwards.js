@@ -9,11 +9,11 @@ import book4 from "../../../assets/images/AboutUsPage/book12.png";
 import book5 from "../../../assets/images/AboutUsPage/book31.png";
 
 const books = [
-  { id: 1, image: book1, bgColor: "rgb(48, 85, 150)" },
-  { id: 2, image: book2, bgColor: "#f0cb64ff" },
-  { id: 3, image: book3, bgColor: "#ffffffff" },
-  { id: 4, image: book4, bgColor: "#f0d664ff" },
-  { id: 5, image: book5, bgColor: "rgb(48, 85, 150)" },
+  { id: 1, image: book1, bgColor: "rgb(143, 107, 107)" },
+  { id: 2, image: book2, bgColor: "rgb(170 164 102)" },
+  { id: 3, image: book3, bgColor: "#fff" },
+  { id: 4, image: book4, bgColor: "rgb(170 164 102)" },
+  { id: 5, image: book5, bgColor: "rgb(143, 107, 107)" },
 ];
 
 const BooksAwards = () => {

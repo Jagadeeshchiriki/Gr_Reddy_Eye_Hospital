@@ -80,7 +80,6 @@
   flex: 0 0 auto;
   width: 95vw;
   max-width: 1400px;
-  padding-right: 2rem;
   height: 100%;
   background: #ffffff;
   border-radius: 24px;
@@ -134,11 +133,11 @@
 
 .doctor-name {
   margin: 0;
-  font-size: clamp(2rem, 3.5vw, 4.5rem);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 500;
   letter-spacing: 0em;
   line-height: 1;
-  color: #050505;
+  color: #0f3443;
 }
 
 .doctor-role {
@@ -225,56 +224,54 @@
 }
 
 /* =========================================================
-   Tablet & phone — unpinned vertical stack
+   Tablet Landscape — keep side-by-side but smaller image
    =========================================================*/
 @media (max-width: 1024px) {
-  /* Release the pin: wrapper grows with its content */
+  .doctor-card {
+    grid-template-columns: 350px 1fr;
+  }
+  .doctor-name { font-size: clamp(1.7rem, 4.4vw, 2.4rem); }
+  .doctor-role { font-size: clamp(1rem, 2.4vw, 1.35rem); }
+  .doctor-desc { font-size: clamp(0.98rem, 2.2vw, 1.15rem); }
+}
+
+/* =========================================================
+   Tablet Portrait & phone — horizontal scroll stack
+   =========================================================*/
+@media (max-width: 768px) {
   .doctors-wrapper {
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-    padding: 64px 5vw;
+    padding: 52px 5vw;
   }
 
-  .doctors-header { margin-bottom: 32px; }
-
-  /* Track leaves absolute positioning and becomes normal flow */
-  .doctors-viewport {
-    position: static;
-    flex: none;
-  }
+  .doctors-header { margin-bottom: 26px; }
+  .doctors-heading { font-size: clamp(1.8rem, 6.6vw, 2.4rem); }
 
   .doctors-track {
-    position: static;
-    flex-direction: column;
-    height: auto;
     gap: 24px;
-    /* No horizontal slide at this size */
-    transform: none;
   }
 
   .doctor-card {
-    width: 100%;
+    width: 90vw;
     max-width: 640px;
-    height: auto;
-    margin: 0 auto;
+    height: 85vh;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: min-content 1fr;
     gap: 0;
   }
 
-  /* height: 100% collapses inside an auto-height grid row */
   .doctor-photo-wrap {
-    height: auto;
-    max-width: 420px;
+    height: 50vh;
+    min-height: 300px;
+    max-width: 100%;
     margin: 0 auto;
-    aspect-ratio: 4 / 5;
-    padding: 16px;
+    aspect-ratio: 1 / 1;
+    padding: 14px;
   }
 
   .doctor-content {
     height: auto;
-    padding: 28px 26px 32px;
+    padding: 24px 22px 28px;
+    overflow-y: auto;
   }
 
   .doctor-text-top {
@@ -282,33 +279,21 @@
     margin-bottom: 20px;
   }
 
-  .doctor-name { font-size: clamp(2.7rem, 4.4vw, 2.4rem); }
+  .doctor-name { font-size: clamp(1.7rem, 4.4vw, 2.4rem); }
   .doctor-role { font-size: clamp(1rem, 2.4vw, 1.25rem); }
   .doctor-desc { font-size: clamp(0.98rem, 2.2vw, 1.15rem); }
-
-
-}
-
-@media (max-width: 768px) {
-  .doctors-wrapper { padding: 52px 5vw; }
-
-  .doctors-header  { margin-bottom: 26px; }
-  .doctors-heading { font-size: clamp(1.8rem, 6.6vw, 2.4rem); }
-
-  .doctor-photo-wrap { max-width: 320px; margin: 0 auto; aspect-ratio: 1 / 1; padding: 14px; }
-
-  .doctor-content { padding: 24px 22px 28px; }
 }
 
 @media (max-width: 480px) {
   .doctors-wrapper { padding: 40px 16px; }
 
-  .doctor-card { border-radius: 18px; }
+  .doctor-card { border-radius: 18px; 
+    gap: 10px;}
 
-  .doctor-photo-wrap { padding: 12px; max-width: 260px; margin: 0 auto; }
+  .doctor-photo-wrap { padding: 12px; max-width: 100%; margin: 0 auto; height: 100%; }
   .doctor-img { border-radius: 12px; }
 
-  .doctor-content { padding: 20px 18px 24px; }
+  .doctor-content { padding: 20px ; }
 
   .doctor-text-top { gap: 10px; margin-bottom: 16px; }
 }
