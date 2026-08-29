@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import footerBg from '../../assets/images/HomePage/footerbg.png';
 import { scrollToTop } from '../../utils/smoothScroll';
 import './footer.css';
