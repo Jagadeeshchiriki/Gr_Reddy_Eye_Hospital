@@ -1,31 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import footerBg from '../../assets/images/HomePage/footerbg.png';
-import { scrollToTop } from '../../utils/smoothScroll';
 import './footer.css';
 
 function Footer() {
-  const [showScrollUp, setShowScrollUp] = useState(false);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 200) {
-  //       setShowScrollUp(true);
-  //     } else {
-  //       setShowScrollUp(false);
-  //     }
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
-
-  const handleScrollToTop = () => {
-    // Native smooth scrolling fights the Lenis loop and overshoots.
-    scrollToTop(false);
-  };
-
   return (
-    <footer 
-      className="footer-container" 
+    <footer
+      className="footer-container"
       style={{ backgroundImage: `url(${footerBg})` }}
     >
       <div className="footer-overlay">
@@ -84,11 +64,11 @@ function Footer() {
 
             {/* Social Media Links */}
             <div className="footer-social-block">
-              <a 
-                href="https://www.instagram.com/grreddyeye_hospital/?hl=en" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="social-icon-btn" 
+              <a
+                href="https://www.instagram.com/grreddyeye_hospital/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon-btn"
                 aria-label="Instagram"
               >
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -98,11 +78,11 @@ function Footer() {
                 </svg>
               </a>
 
-              <a 
-                href="https://www.youtube.com/@drgrreddyeyehospital9390" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="social-icon-btn" 
+              <a
+                href="https://www.youtube.com/@drgrreddyeyehospital9390"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon-btn"
                 aria-label="YouTube"
               >
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -120,17 +100,6 @@ function Footer() {
         </div>
       </div>
 
-      {/* Floating Scroll to Top Button */}
-      <button 
-        className={`scroll-up-btn ${showScrollUp ? 'visible' : ''}`}
-        onClick={handleScrollToTop}
-        aria-label="Scroll up to top"
-        title="Scroll up to top"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FEE89D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-      </button>
     </footer>
   );
 }

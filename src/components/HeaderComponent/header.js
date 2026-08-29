@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import useAppNavigation from '../../hooks/useAppNavigation';
+import { scrollToTop } from '../../utils/smoothScroll';
 import logo1 from '../../assets/images/HomePage/Logo1.png';
 import './header.css';
 
@@ -9,6 +10,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [showScrollUp, setShowScrollUp] = useState(false);
   const lastScrollY = useRef(0);
 
   const overlayRef = useRef(null);
@@ -41,6 +43,7 @@ function Header() {
       }
       
       setIsScrolled(currentScrollY > 10);
+      setShowScrollUp(currentScrollY > 200);
       lastScrollY.current = currentScrollY;
     };
 
@@ -177,6 +180,11 @@ function Header() {
     closeMenuAnimation();
   };
 
+  const handleScrollToTop = () => {
+    // Native smooth scrolling fights the Lenis loop and overshoots.
+    scrollToTop(false);
+  };
+
   return (
     <>
       {/* HEADER */}
@@ -280,6 +288,18 @@ function Header() {
           </a>
         </nav>
       </div>
+
+      {/* Floating Scroll to Top Button */}
+      <button
+        className={`scroll-up-btn ${showScrollUp ? 'visible' : ''}`}
+        onClick={handleScrollToTop}
+        aria-label="Scroll up to top"
+        title="Scroll up to top"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FEE89D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
     </>
   );
 }
