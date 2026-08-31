@@ -1,5 +1,7 @@
 import React from 'react';
 import footerBg from '../../assets/images/HomePage/footerbg.png';
+import phoneIcon from '../../assets/images/Footer/contact.svg';
+import locationIcon from '../../assets/images/Footer/location1.svg';
 import './footer.css';
 
 function Footer() {
@@ -26,15 +28,20 @@ function Footer() {
               <ul className="contact-list">
                 <li className="contact-item">
                   <span className="contact-icon" aria-hidden="true">
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
+                    <img src={locationIcon} alt="Location" width="45" height="45" />
                   </span>
                   <div className="contact-text">
                     Opp. Bus Depot,<br/>
                     Ambedkar Nagar,<br />
                     Tadepalligudem - 534101.
+                  </div>
+                </li>
+                                <li className="contact-item">
+                  <span className="contact-icon" aria-hidden="true">
+                    <img src={phoneIcon} alt="Phone" width="40" height="45" />
+                  </span>
+                  <div className="contact-text">
+                    +91-97014 34106
                   </div>
                 </li>
 

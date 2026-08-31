@@ -37,6 +37,7 @@
   padding: 40px 0;
   display: flex;
   justify-content: center;
+  pointer-events: none;
 }
 
 .books-gallery {
@@ -47,6 +48,7 @@
   transform-style: preserve-3d;
   width: fit-content;
   margin: 0 auto;
+  pointer-events: none;
 }
 
 /* ==========================================
@@ -65,7 +67,7 @@
   align-items: center;
   padding: 14px;
   box-sizing: border-box;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  pointer-events: auto;
 }
 
 .book-image-wrapper {
@@ -77,8 +79,8 @@
 }
 
 .book-card img {
-  max-width: 95%;
-  max-height: 95%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   border-radius: 4px;
   transition: transform 0.4s ease;
@@ -122,11 +124,11 @@
 .book-card:hover {
   transform: rotateY(0deg) scale(1.18) translateZ(100px) translateY(-15px) !important;
   z-index: 20 !important;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18) !important;
+  
 }
 
 .book-card:hover img {
-  transform: scale(1.03);
+  transform: scale(1.203);
 }
 
 /* ==========================================

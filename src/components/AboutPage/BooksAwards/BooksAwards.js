@@ -40,7 +40,7 @@ const BooksAwards = () => {
               <div 
                 key={book.id} 
                 className={`book-card ${positionClass}`}
-                style={{ backgroundColor: book.bgColor }}
+                
               >
                 <div className="book-image-wrapper">
                   <img src={book.image} alt={`Award ${book.id}`} />
