@@ -340,6 +340,9 @@
   .our-story-container {
     padding: 64px 24px;
   }
+  .our-story-sidebar{
+    width: 100%;
+  }
 
   .our-story-sticky {
     position: relative;
@@ -383,9 +386,7 @@
     gap: 42px;
   }
 
-  .our-story-tagline {
-    font-size: 28px;
-  }
+ 
 
   .our-story-section-title {
     font-size: 32px;
