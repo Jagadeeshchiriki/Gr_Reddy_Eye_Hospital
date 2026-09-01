@@ -18,7 +18,7 @@ const books = [
 
 const BooksAwards = () => {
   return (
-    <section className="books-awards-section">
+    <section className="books-awards-section" id="books-awards-section">
       <div className="books-header">
         <h2>Books That Educate.<br/>Awards That Inspire.</h2>
         <p>Dr. G. R. Reddy's contributions to ophthalmology extend beyond clinical practice through authorship, teaching, and decades of professional service.</p>

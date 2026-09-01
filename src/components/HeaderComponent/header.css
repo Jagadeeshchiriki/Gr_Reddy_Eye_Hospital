@@ -1,5 +1,3 @@
-
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -49,8 +47,6 @@
 }
 
 .header-logo-img {
-  /* 20% down from 70px to match the reference design, where the logo block
-     is ~13.8% of viewport width rather than the ~17.3% this rendered at. */
   height: 56px;
   width: auto;
   object-fit: contain;
@@ -73,7 +69,6 @@
 }
 
 .logo-title {
-
   font-size: 2.12rem;
   font-weight: 500;
 
@@ -86,8 +81,6 @@
 }
 
 .logo-subtitle {
-
-
   font-size: 1.28rem;
   font-weight: 400;
 
@@ -172,7 +165,6 @@
 }
 
 
-
 /* White lines when menu is open */
 
 .header-container.menu-open .menu-line {
@@ -181,7 +173,7 @@
 
 
 /* =========================================================
-   FULLSCREEN CIRCULAR MENU
+   FULLSCREEN CIRCULAR MENU & LAYOUT
 ========================================================= */
 
 .menu-overlay {
@@ -201,17 +193,12 @@
   align-items: center;
   justify-content: center;
 
-  /*
-    Same circular reveal concept
-    as your HTML reference.
-  */
   clip-path: circle(
     0% at calc(100% - 4rem) 4rem
   );
 
   pointer-events: none;
 
-  /* Nav must stay reachable on short/landscape viewports */
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -219,20 +206,45 @@
   will-change: clip-path;
 }
 
+/* Gradient overlay at bottom to cover the bottom of menubg img */
+.menu-overlay::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: linear-gradient(to top, #040608 0%, #080e15 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Wrapper containing Left Menu + Right Image */
+.menu-wrapper {
+  width: 100%;
+  max-width: 1600px;
+  height: 100%;
+  padding: 0 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+}
+
 
 /* =========================================================
-   NAVIGATION
+   NAVIGATION (LEFT SIDE)
 ========================================================= */
 
 .fullscreen-nav {
   display: flex;
-
   flex-direction: column;
-
   gap: 36px;
+  z-index: 2;
 
   opacity: 0;
-
   transform: translateX(100px);
 
   will-change: transform, opacity;
@@ -248,19 +260,15 @@
 
   text-decoration: none;
 
-  
-
   font-size: clamp(
-    4rem,
-    8vw,
-    8rem
+    3.5rem,
+    6.5vw,
+    6.5rem
   );
 
   font-weight: 300;
 
-  line-height: 0.95;
-
-  font-style: italic;
+  line-height: 1.1;
 
   color: rgb(255, 255, 255);
 
@@ -270,30 +278,49 @@
 }
 
 .fullscreen-nav-link span {
-
   font-size: 10px;
-
   font-style: normal;
-
   font-weight: 500;
-
   letter-spacing: 0.25em;
-
   color: #c5a059;
-
   opacity: 0.8;
-
   transform: translateY(-8px);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .fullscreen-nav-link:hover {
     color: #c5a059;
-
     transform: translateX(18px);
   }
 }
 
+
+/* =========================================================
+   MENU IMAGE (RIGHT SIDE)
+========================================================= */
+
+.menu-image-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100%;
+  
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+
+  will-change: transform, opacity;
+}
+
+.menu-bg-img {
+  height: 100%;
+  
+  width: auto;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.4));
+  opacity: .5;
+}
 
 
 /* =========================================================
@@ -309,39 +336,35 @@
   padding-bottom: 8px;
 }
 
+
 /* =========================================================
-   BODY SCROLL LOCK — set by header.js while the menu is open
+   BODY SCROLL LOCK
 ========================================================= */
 
+html.menu-scroll-lock,
 body.menu-scroll-lock {
-  overflow: hidden;
-  touch-action: none;
+  overflow: hidden !important;
+  touch-action: none !important;
 }
 
 
 /* =========================================================
    RESPONSIVE
-   Ladder: 1600 / 1280 / 1024 / 900 / 768 / 480
-========================================================= */
-
-
-/* =========================================================
-   DESKTOP
 ========================================================= */
 
 @media (min-width: 769px) {
-
   .fullscreen-nav {
-    min-width: 600px;
+    min-width: 450px;
   }
-
 }
 
-
 @media (max-width: 1280px) {
-
   .header-content {
     padding: 12px 56px;
+  }
+
+  .menu-wrapper {
+    padding: 0 56px;
   }
 
   .logo-title {
@@ -357,17 +380,23 @@ body.menu-scroll-lock {
     height: 50px;
   }
 
+  .menu-image-container {
+    height: 75%;
+  }
 }
 
 
 /* =========================================================
-   TABLET
+   TABLET (900px)
 ========================================================= */
 
 @media (max-width: 900px) {
-
   .header-content {
     padding: 12px 40px;
+  }
+
+  .menu-wrapper {
+    padding: 0 40px;
   }
 
   .logo-title {
@@ -382,12 +411,9 @@ body.menu-scroll-lock {
     height: 46px;
   }
 
-  /* Button and bars scale together — the bars are wider than the
-     shrinking button otherwise and spill out of it. */
   .menu-toggle-btn {
     width: 64px;
     height: 64px;
-
     gap: 7px;
   }
 
@@ -404,23 +430,20 @@ body.menu-scroll-lock {
   }
 
   .fullscreen-nav-link {
-    font-size: clamp(
-      3.5rem,
-      10vw,
-      6rem
-    );
+    font-size: clamp(3rem, 7vw, 4.5rem);
   }
 
-
+  .menu-image-container {
+    height: 100%;
+  }
 }
 
 
 /* =========================================================
-   MOBILE
+   MOBILE (768px)
 ========================================================= */
 
 @media (max-width: 768px) {
-
   .header-container {
     margin-top: 15px;
   }
@@ -433,9 +456,7 @@ body.menu-scroll-lock {
     padding: 10px 24px;
   }
 
-
   /* Logo */
-
   .header-logo-link {
     gap: 6px;
   }
@@ -446,25 +467,19 @@ body.menu-scroll-lock {
 
   .logo-title {
     font-size: 1.35rem;
-
     letter-spacing: 0.5px;
   }
 
   .logo-subtitle {
     font-size: 0.8rem;
-
     letter-spacing: 1px;
   }
 
-
-  /* Button — bars must fit inside 46px */
-
+  /* Menu Toggle Button */
   .menu-toggle-btn {
     width: 46px;
     height: 46px;
-
     padding: 6px;
-
     gap: 6px;
   }
 
@@ -480,30 +495,25 @@ body.menu-scroll-lock {
     width: 23px;
   }
 
-
-  /* Fullscreen menu */
-
+  /* Fullscreen Menu Overlay */
   .menu-overlay {
-    clip-path: circle(
-      0% at calc(100% - 2.5rem) 2.5rem
-    );
+    clip-path: circle(0% at calc(100% - 2.5rem) 2.5rem);
+  }
+
+  .menu-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 30px;
   }
 
   .fullscreen-nav {
     width: 100%;
-
-    padding: 0 30px;
-
-    gap: 18px;
+    gap: 22px;
   }
 
   .fullscreen-nav-link {
-    font-size: clamp(
-      2.6rem,
-      13vw,
-      5rem
-    );
-
+    font-size: clamp(2.5rem, 10vw, 4rem);
     gap: 10px;
   }
 
@@ -511,29 +521,43 @@ body.menu-scroll-lock {
     font-size: 8px;
   }
 
+  /* On mobile, place doctors image bottom right subtly behind text */
+  .menu-image-container {
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    height: 50vh;
+    z-index: 1;
+  }
+
+  .menu-bg-img {
+    height: 100%;
+    max-height: 480px;
+  }
+
+  .menu-overlay::after {
+    height: 15vh;
+  }
 }
 
 
 @media (hover: hover) and (pointer: fine) and (max-width: 768px) {
-
   .fullscreen-nav-link:hover {
     transform: translateX(8px);
   }
-
 }
 
 
 /* =========================================================
-   SMALL MOBILE
+   SMALL MOBILE (480px)
 ========================================================= */
 
 @media (max-width: 480px) {
-
   .header-content {
     padding: 8px 16px;
   }
 
-  .header-logo-link{
+  .header-logo-link {
     gap: 0px;
   }
 
@@ -548,14 +572,12 @@ body.menu-scroll-lock {
 
   .logo-subtitle {
     font-size: 0.7rem;
-
     letter-spacing: 1.8px;
   }
 
   .menu-toggle-btn {
     width: 42px;
     height: 42px;
-
     gap: 5px;
   }
 
@@ -571,26 +593,34 @@ body.menu-scroll-lock {
     width: 20px;
   }
 
-  .fullscreen-nav {
+  .menu-wrapper {
     padding: 0 22px;
+    justify-content: center;
+    
+  }
+  .fullscreen-nav{
+    margin-bottom: 65%;  
   }
 
   .fullscreen-nav-link {
-    font-size: clamp(2.3rem, 12vw, 3.3rem);
+    font-size: clamp(2.3rem, 11vw, 3.2rem);
   }
 
+  .menu-image-container {
+    height: 80vh;
+  }
+
+  .menu-overlay::after {
+    height: 20vh;
+  }
 }
 
 
 /* =========================================================
    SHORT / LANDSCAPE VIEWPORTS
-
-   Three links at the mobile clamp floor plus gaps overflow a
-   ~360px-tall landscape phone, so the nav has to compress.
 ========================================================= */
 
 @media (max-height: 560px) and (orientation: landscape) {
-
   .header-container {
     margin-top: 10px;
   }
@@ -601,14 +631,14 @@ body.menu-scroll-lock {
 
   .fullscreen-nav {
     gap: 10px;
-
-    padding: 24px 30px;
   }
 
   .fullscreen-nav-link {
     font-size: clamp(1.6rem, 7vh, 2.6rem);
-
     line-height: 1.05;
   }
 
+  .menu-image-container {
+    height: 80vh;
+  }
 }

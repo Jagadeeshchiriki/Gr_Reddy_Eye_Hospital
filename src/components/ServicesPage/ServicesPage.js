@@ -31,7 +31,7 @@ const servicesData = [
     image: imgRetinal,
   },
   {
-    title: "Glaucoma Department",
+    title: "Glaucoma Care",
     desc1: "Glaucoma is a group of eye conditions that can damage the optic nerve, often due to increased pressure inside the eye. It can gradually cause loss of peripheral vision and may progress without noticeable symptoms in its early stages.",
     desc2: "Our glaucoma specialists provide comprehensive evaluation, diagnosis, and long-term management using advanced tests such as intraocular pressure measurement, optic nerve assessment, visual field analysis, and OCT. Treatment may include eye drops, laser procedures, or surgery depending on the severity of the condition.",
     bgColor: "#ffffff",
@@ -108,7 +108,7 @@ const ServicesPage = () => {
                             backgroundColor: service.bgColor, 
                             color: service.textColor,
                             zIndex: index + 1,
-                            top: `${index * 1}px` 
+                            top: `${index * 0}px` 
                         }}
                     >
                         <div className="service-card-inner">

@@ -117,8 +117,8 @@ function AboutComponent() {
             </div>
             <div className="card-body">
               <div>
-                <div className="card-stat">90%</div>
-                <div className="card-label">Patient Satisfaction</div>
+                <div className="card-stat">99%</div>
+                <div className="card-label">Care Excellence</div>
               </div>
               <p className="card-desc">Personalized care focused on comfort, safety, and positive experiences.</p>
             </div>

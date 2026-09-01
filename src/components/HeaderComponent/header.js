@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import useAppNavigation from '../../hooks/useAppNavigation';
 import { scrollToTop } from '../../utils/smoothScroll';
 import logo1 from '../../assets/images/HomePage/Logo1.png';
+import menubgImg from '../../assets/images/Header/menubg.png'; 
 import './header.css';
 
 function Header() {
@@ -15,14 +16,12 @@ function Header() {
 
   const overlayRef = useRef(null);
   const navRef = useRef(null);
+  const imgRef = useRef(null);
   const bar1Ref = useRef(null);
   const bar2Ref = useRef(null);
   const btnRef = useRef(null);
 
   // Reveal origin, measured from where the toggle button actually is.
-  // Previously this was a hardcoded `calc(100% - 4rem) 4rem`, written
-  // inline by GSAP, which permanently beat the mobile origin in the
-  // stylesheet once the menu had been opened once.
   const getRevealOrigin = () => {
     const btn = btnRef.current;
     if (!btn) return 'calc(100% - 4rem) 4rem';
@@ -54,18 +53,21 @@ function Header() {
     };
   }, []);
 
-  // The page used to keep scrolling behind the fullscreen menu on touch.
+  // Lock body scroll on touch when menu is open
   useEffect(() => {
     document.body.classList.toggle('menu-scroll-lock', isMenuOpen);
+    document.documentElement.classList.toggle('menu-scroll-lock', isMenuOpen);
 
     return () => {
       document.body.classList.remove('menu-scroll-lock');
+      document.documentElement.classList.remove('menu-scroll-lock');
     };
   }, [isMenuOpen]);
 
   const openMenuAnimation = () => {
     const overlay = overlayRef.current;
     const nav = navRef.current;
+    const imgContainer = imgRef.current;
     const bar1 = bar1Ref.current;
     const bar2 = bar2Ref.current;
 
@@ -91,13 +93,12 @@ function Header() {
     gsap.to(bar2, {
       y: -5,
       rotate: -45,
-      // Match bar 1 so the two form an even X at every breakpoint
       width: () => (bar1 ? bar1.offsetWidth : 62),
       duration: 0.4,
       ease: 'power2.out',
     });
 
-    // Menu entrance
+    // Menu text entrance
     gsap.fromTo(
       nav,
       {
@@ -112,21 +113,49 @@ function Header() {
         ease: 'power4.out',
       }
     );
+
+    // Image entrance animation (fades in & slides gently into view)
+    if (imgContainer) {
+      gsap.fromTo(
+        imgContainer,
+        {
+          x: 60,
+          opacity: 0,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          delay: 0.35,
+          duration: 0.9,
+          ease: 'power3.out',
+        }
+      );
+    }
   };
 
   const closeMenuAnimation = () => {
     const overlay = overlayRef.current;
     const nav = navRef.current;
+    const imgContainer = imgRef.current;
     const bar1 = bar1Ref.current;
     const bar2 = bar2Ref.current;
 
-    // Hide menu content first
+    // Hide menu content and image first
     gsap.to(nav, {
       opacity: 0,
       x: 50,
       duration: 0.25,
       ease: 'power2.in',
     });
+
+    if (imgContainer) {
+      gsap.to(imgContainer, {
+        opacity: 0,
+        x: 30,
+        duration: 0.25,
+        ease: 'power2.in',
+      });
+    }
 
     // Close circular overlay
     gsap.to(overlay, {
@@ -154,13 +183,10 @@ function Header() {
       rotate: 0,
       duration: 0.4,
       ease: 'power2.out',
-      // Hand the width back to the stylesheet rather than a hardcoded px
-      // value, so each breakpoint keeps its own bar width.
       onComplete: () => {
         gsap.set(bar2, { clearProps: 'width' });
       },
     });
-
   };
 
   const toggleMenu = () => {
@@ -181,7 +207,6 @@ function Header() {
   };
 
   const handleScrollToTop = () => {
-    // Native smooth scrolling fights the Lenis loop and overshoots.
     scrollToTop(false);
   };
 
@@ -191,10 +216,11 @@ function Header() {
       <header
         className={`header-container ${
           isScrolled ? 'scrolled' : ''
-        } ${isMenuOpen ? 'menu-open' : ''} ${isHidden && !isMenuOpen ? 'header-hidden' : ''}`}
+        } ${isMenuOpen ? 'menu-open' : ''} ${
+          isHidden && !isMenuOpen ? 'header-hidden' : ''
+        }`}
       >
         <div className="header-content">
-
           {/* LOGO */}
           <a
             href="/"
@@ -236,67 +262,80 @@ function Header() {
               ref={bar2Ref}
               className="menu-line menu-line-2"
             />
-
-           
           </button>
         </div>
       </header>
 
-      {/* FULLSCREEN MENU */}
-      <div
-        ref={overlayRef}
-        className="menu-overlay"
-      >
-        <nav
-          ref={navRef}
-          className="fullscreen-nav"
-        >
-          <a
-            href="/"
-            className="fullscreen-nav-link"
-            onClick={(e) => {
-              e.preventDefault();
-              navigateTo('/');
-              closeMenu();
-            }}
-          >
-            Home
-          </a>
+      {/* FULLSCREEN MENU OVERLAY */}
+      <div ref={overlayRef} className="menu-overlay">
+        <div className="menu-wrapper">
+          {/* Left Navigation Links */}
+          <nav ref={navRef} className="fullscreen-nav">
+            <a
+              href="/"
+              className="fullscreen-nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/');
+                closeMenu();
+              }}
+            >
+              Home
+            </a>
 
-          <a
-            href="/about"
-            className="fullscreen-nav-link"
-            onClick={(e) => {
-              e.preventDefault();
-              navigateTo('/about');
-              closeMenu();
-            }}
-          >
-            About Us
-          </a>
+            <a
+              href="/about"
+              className="fullscreen-nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/about');
+                closeMenu();
+              }}
+            >
+              About Us
+            </a>
 
-          <a
-            href="/service"
-            className="fullscreen-nav-link"
-            onClick={(e) => {
-              e.preventDefault();
-              navigateTo('/service');
-              closeMenu();
-            }}
-          >
-            Services
-          </a>
-        </nav>
+            <a
+              href="/service"
+              className="fullscreen-nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/service');
+                closeMenu();
+              }}
+            >
+              Services
+            </a>
+          </nav>
+
+          {/* Right Image Container */}
+          <div ref={imgRef} className="menu-image-container">
+            <img
+              src={menubgImg}
+              alt="GR Reddy Doctors"
+              className="menu-bg-img"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Floating Scroll to Top Button */}
       <button
-        className={`scroll-up-btn ${showScrollUp ? 'visible' : ''}`}
+        className={`scroll-up-btn ${showScrollUp && !isMenuOpen ? 'visible' : ''}`}
         onClick={handleScrollToTop}
         aria-label="Scroll up to top"
         title="Scroll up to top"
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FEE89D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#FEE89D"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
       </button>

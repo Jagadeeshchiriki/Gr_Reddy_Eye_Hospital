@@ -143,7 +143,29 @@ const DoctorsLegacy = () => {
               {doctor.sections.map((sec, i) => (
                 <div key={i} className="doctor-detail-section">
                   <hr className="doctor-divider" />
-                  <h4>{sec.title}</h4>
+                  {sec.title === "Author & Educator" ? (
+                    <h4 
+                      onClick={() => {
+                        const element = document.getElementById("books-awards-section");
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}
+                      style={{ 
+                        cursor: "pointer", 
+                        display: "inline-block",
+                        backgroundColor: "#fef08a",
+                        padding: "4px 12px",
+                        borderRadius: "6px",
+                        color: "#000"
+                      }}
+                      title="Click to view Books & Awards"
+                    >
+                      {sec.title}
+                    </h4>
+                  ) : (
+                    <h4>{sec.title}</h4>
+                  )}
                   <p>{sec.text}</p>
                 </div>
               ))}

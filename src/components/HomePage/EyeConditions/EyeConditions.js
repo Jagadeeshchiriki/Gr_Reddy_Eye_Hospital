@@ -39,14 +39,14 @@ const EyeConditions = () => {
       color: "#28559c",
     },
     {
-      name: "Dry Eye",
+      name: "Dry Eyes",
       image: dryeyecondition||
         "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1800&q=90",
       bg: "#28559c",
       color: "#fff",
     },
     {
-      name: "Retina",
+      name: "Retina Disorders",
       image: retinacondition||
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1800&q=90",
       bg: "#eadfd5",
