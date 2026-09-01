@@ -595,11 +595,11 @@ body.menu-scroll-lock {
 
   .menu-wrapper {
     padding: 0 22px;
-    justify-content: center;
-    
+    justify-content: flex-start;
+    padding-top: 18vh;
   }
-  .fullscreen-nav{
-    margin-bottom: 65%;  
+  .fullscreen-nav {
+    margin-bottom: 0;
   }
 
   .fullscreen-nav-link {
