@@ -73,13 +73,11 @@
               transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover reveal is the only thing that lifts the grayscale filter, so it
-   must be gated — touch devices get the colour end state further down. */
-@media (hover: hover) and (pointer: fine) {
-  .ach-card:hover .ach-img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.05);
-  }
+/* Hover reveal applies to all devices now */
+.ach-card:hover .ach-img,
+.ach-card:active .ach-img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
 }
 
 /* ── Dark gradient at bottom for text readability ── */
@@ -122,15 +120,7 @@
   opacity: 0.88;
 }
 
-/* ============================================================
-   Touch devices — no hover, so show the colour end state.
-   Without this the six awards stay permanently grey.
-   ============================================================ */
-@media (hover: none) {
-  .ach-img {
-    filter: none;
-  }
-}
+
 
 /* ============================================================
    Heading rhythm — one fluid step instead of a 116px -> 40px jump
