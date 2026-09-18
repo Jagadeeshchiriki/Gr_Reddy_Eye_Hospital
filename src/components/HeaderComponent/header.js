@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import useAppNavigation from '../../hooks/useAppNavigation';
 import { scrollToTop } from '../../utils/smoothScroll';
-import logo1 from '../../assets/images/HomePage/Logo1.png';
-import menubgImg from '../../assets/images/Header/menubg.png'; 
+import logo1 from '../../assets/images/Header/Logo1.avif';
+import menubgImg from '../../assets/images/Header/menubg.avif'; 
 import './header.css';
 
 function Header() {

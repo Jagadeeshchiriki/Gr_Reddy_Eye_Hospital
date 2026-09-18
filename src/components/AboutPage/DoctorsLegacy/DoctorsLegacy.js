@@ -4,8 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./DoctorsLegacy.css";
 
 // Images
-import doctor1 from "../../../assets/images/AboutUsPage/doctor13.png";
-import doctor2 from "../../../assets/images/AboutUsPage/doctor2_654x654.png";
+import doctor1 from "../../../assets/images/AboutUsPage/drgrreedy.avif";
+import doctor2 from "../../../assets/images/AboutUsPage/drsandeepreddy.avif";
 
 
 gsap.registerPlugin(ScrollTrigger);

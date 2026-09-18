@@ -4,14 +4,14 @@ import Footer from "../FooterComponent/footer";
 import "./ServicesPage.css";
 
 // Import assets
-import imgCataract from "../../assets/images/ServicesPage/Cataractservice.png";
-import imgRetinal from "../../assets/images/ServicesPage/Retinal_injection 1.png";
-import imgGlucoma from "../../assets/images/ServicesPage/gl-50.jpg";
-import imgRefractive from "../../assets/images/ServicesPage/refractive-surgery.jpg";
-import imgComprehensive from "../../assets/images/ServicesPage/comprehensive.jpg";
-import imgCornea from "../../assets/images/ServicesPage/conrnea.jpg";
-import imgPaediatric from "../../assets/images/ServicesPage/paediatric.jpg";
-import imgOcular from "../../assets/images/ServicesPage/ocular_injuries.png";
+import imgCataract from "../../assets/images/ServicesPage/Cataractservice.avif";
+import imgRetinal from "../../assets/images/ServicesPage/Retinal_injection 1.avif";
+import imgGlucoma from "../../assets/images/ServicesPage/gl-50.avif";
+import imgRefractive from "../../assets/images/ServicesPage/refractive-surgery.avif";
+import imgComprehensive from "../../assets/images/ServicesPage/comprehensive.avif";
+import imgCornea from "../../assets/images/ServicesPage/conrnea.avif";
+import imgPaediatric from "../../assets/images/ServicesPage/paediatric.avif";
+import imgOcular from "../../assets/images/ServicesPage/ocular_injuries.avif";
 
 const servicesData = [
   {

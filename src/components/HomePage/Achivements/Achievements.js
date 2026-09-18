@@ -3,12 +3,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./Achievements.css";
-import awward1 from "../../../assets/images/HomePage/awward1.png";
-import awward2 from "../../../assets/images/HomePage/awward2.png";
-import awward3 from "../../../assets/images/HomePage/awward3.png";
-import awward4 from "../../../assets/images/HomePage/awward4.png";
-import awward5 from "../../../assets/images/HomePage/awward51.jpeg";
-import awward6 from "../../../assets/images/HomePage/awward6.png";
+import awward1 from "../../../assets/images/HomePage/awward1.avif";
+import awward2 from "../../../assets/images/HomePage/awward2.avif";
+import awward3 from "../../../assets/images/HomePage/awward3.avif";
+import awward4 from "../../../assets/images/HomePage/awward4.avif";
+import awward5 from "../../../assets/images/HomePage/awward51.avif";
+import awward6 from "../../../assets/images/HomePage/awward6.avif";
 
 gsap.registerPlugin(ScrollTrigger);
 

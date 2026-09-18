@@ -1,5 +1,5 @@
 import React from 'react';
-import footerBg from '../../assets/images/HomePage/footerbg.png';
+import footerBg from '../../assets/images/Footer/footerbg.avif';
 import phoneIcon from '../../assets/images/Footer/contact.svg';
 import locationIcon from '../../assets/images/Footer/location1.svg';
 import './footer.css';

@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import facility1 from "../../../assets/images/AboutUsPage/opticalstore.jpg";
-import facility2 from "../../../assets/images/AboutUsPage/machine.jpg";
-import facility3 from "../../../assets/images/AboutUsPage/operatoinT.jpg";
-import facility4 from "../../../assets/images/AboutUsPage/waitingarea.jpg";
-import facility5 from "../../../assets/images/AboutUsPage/parking.jpg";
+import facility1 from "../../../assets/images/AboutUsPage/opticalstore.avif";
+import facility2 from "../../../assets/images/AboutUsPage/machine.avif";
+import facility3 from "../../../assets/images/AboutUsPage/operatoinT.avif";
+import facility4 from "../../../assets/images/AboutUsPage/waitingarea.avif";
+import facility5 from "../../../assets/images/AboutUsPage/parking.avif";
 
 
 import "./Facilities.css";

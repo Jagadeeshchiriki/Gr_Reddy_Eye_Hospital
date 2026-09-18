@@ -13,7 +13,7 @@
   line-height: 0;
 }
 
-/* NOTE: the CTA wording is baked into CTA.png, so the image is scaled
+/* NOTE: the CTA wording is baked into CTA.avif, so the image is scaled
    rather than cropped — cropping (object-fit: cover) would cut the text
    off on narrow screens. On small phones the baked-in text is therefore
    small; a proper fix needs a mobile-cropped source via <picture>, or

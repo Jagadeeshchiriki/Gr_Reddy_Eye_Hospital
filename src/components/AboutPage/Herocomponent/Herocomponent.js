@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Herocomponent.css";
-import HospitalImg from "../../../assets/images/AboutUsPage/hospital1.png";
+import HospitalImg from "../../../assets/images/AboutUsPage/hospital1.avif";
 
 const Herocomponent = () => {
   const [isLoaded, setIsLoaded] = useState(false);

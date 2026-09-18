@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import eye1 from "../../../assets/images/HomePage/eye1.png";
+import eye1 from "../../../assets/images/HomePage/eye1.avif";
 import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./Intro.css";
 

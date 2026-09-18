@@ -3,11 +3,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DESKTOP_MQ } from "../../../utils/breakpoints";
 import "./EyeConditions.css";
-import cataractcondtion from "../../../assets/images/HomePage/cataractcondition.png";
-import glaucomacondition from "../../../assets/images/HomePage/glaucomacondition.png";
-import retinacondition from "../../../assets/images/HomePage/retinacondition.png";
-import dryeyecondition from "../../../assets/images/HomePage/dryeyecondition.png";
-import astigmatismcondition from "../../../assets/images/HomePage/astigmatismcondition.png";
+import cataractcondtion from "../../../assets/images/HomePage/cataractcondition.avif";
+import glaucomacondition from "../../../assets/images/HomePage/glaucomacondition.avif";
+import retinacondition from "../../../assets/images/HomePage/retinacondition.avif";
+import dryeyecondition from "../../../assets/images/HomePage/dryeyecondition.avif";
+import astigmatismcondition from "../../../assets/images/HomePage/astigmatismcondition.avif";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,36 +19,31 @@ const EyeConditions = () => {
   const conditions = [
     {
       name: "Cataract",
-      image:
-        cataractcondtion,
+      image: cataractcondtion,
       bg: "#28559c",
       color: "#fff",
     },
     {
       name: "Astigmatism",
-      image:astigmatismcondition||
-        "https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=1800&q=90",
+      image:astigmatismcondition,
       bg: "#fee5a7",
       color: "#000",
     },
     {
       name: "Glaucoma",
-      image:glaucomacondition||
-        "https://images.unsplash.com/photo-1588776814546-daab30f310ce?auto=format&fit=crop&w=1800&q=90",
+      image:glaucomacondition,
       bg: "#fff",
       color: "#28559c",
     },
     {
       name: "Dry Eyes",
-      image: dryeyecondition||
-        "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1800&q=90",
+      image: dryeyecondition,
       bg: "#28559c",
       color: "#fff",
     },
     {
       name: "Retina Disorders",
-      image: retinacondition||
-        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1800&q=90",
+      image: retinacondition,
       bg: "#eadfd5",
       color: "#111",
     },

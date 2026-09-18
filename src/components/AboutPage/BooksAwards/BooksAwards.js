@@ -2,11 +2,11 @@ import React from "react";
 import "./BooksAwards.css";
 
 // Images
-import book1 from "../../../assets/images/AboutUsPage/book31.png";
-import book2 from "../../../assets/images/AboutUsPage/book12.png";
-import book3 from "../../../assets/images/AboutUsPage/book21.png";
-import book4 from "../../../assets/images/AboutUsPage/book12.png";
-import book5 from "../../../assets/images/AboutUsPage/book31.png";
+import book1 from "../../../assets/images/AboutUsPage/book31.avif";
+import book2 from "../../../assets/images/AboutUsPage/book12.avif";
+import book3 from "../../../assets/images/AboutUsPage/book21.avif";
+import book4 from "../../../assets/images/AboutUsPage/book12.avif";
+import book5 from "../../../assets/images/AboutUsPage/book31.avif";
 
 const books = [
   { id: 1, image: book1, bgColor: "rgb(143, 107, 107)" },

@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Doctors.css";
-import doctor1 from "../../../assets/images/HomePage/doctor1.jpg";
-import doctor2 from "../../../assets/images/HomePage/doctor21.jpg";
+import doctor1 from "../../../assets/images/HomePage/doctor1.avif";
+import doctor2 from "../../../assets/images/HomePage/doctor21.avif";
 
 gsap.registerPlugin(ScrollTrigger);
 
